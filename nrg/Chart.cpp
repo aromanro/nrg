@@ -600,4 +600,10 @@ void Chart::AddDataSlice(double Xval, const double *slice, unsigned int len)
 void Chart::clear()
 {
 	dataSets.dataSets.clear();
+
+	// clear the labels
+	std::list<CString> l;
+
+	X.SetLabels(l);
+	Y.SetLabels(l);
 }
