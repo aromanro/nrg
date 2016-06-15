@@ -1,0 +1,518 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+#include "verrsrc.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (United States) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "#include ""verrsrc.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#include ""res\\nrg.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""      // Standard components\r\n"
+    "#include ""afxprint.rc""    // printing/print preview resources\r\n"
+    "#if !defined(_AFXDLL)\r\n"
+    "#include ""afxribbon.rc""        // MFC ribbon and control bar resources\r\n"
+    "#endif\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\nrg.ico"
+
+IDR_nrgTYPE             ICON                    "res\\nrgDoc.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP                  "res\\Toolbar.bmp"
+
+IDR_MAINFRAME_256       BITMAP                  "res\\Toolbar256.bmp"
+
+IDR_MENU_IMAGES         BITMAP                  "res\\menuimages.bmp"
+
+IDB_MENU_IMAGES_24      BITMAP                  "res\\menuimages_hc.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MAINFRAME_256 TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_MENU_IMAGES TOOLBAR 16, 15
+BEGIN
+    BUTTON      ID_WINDOW_MANAGER
+    SEPARATOR
+    BUTTON      ID_WINDOW_CASCADE
+    BUTTON      ID_WINDOW_TILE_HORZ
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Calculate"
+    BEGIN
+        MENUITEM "&Start",                      ID_CALCULATE_START
+        MENUITEM "S&top",                       ID_CALCULATE_STOP
+    END
+    POPUP "&View"
+    BEGIN
+        POPUP "&Toolbars and Docking Windows"
+        BEGIN
+            MENUITEM "<placeholder>",               ID_VIEW_TOOLBAR
+        END
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        POPUP "&Application Look"
+        BEGIN
+            MENUITEM "Windows &2000",               ID_VIEW_APPLOOK_WIN_2000
+            MENUITEM "Office &XP",                  ID_VIEW_APPLOOK_OFF_XP
+            MENUITEM "&Windows XP",                 ID_VIEW_APPLOOK_WIN_XP
+            MENUITEM "Office 200&3",                ID_VIEW_APPLOOK_OFF_2003
+            MENUITEM "Visual Studio 200&5",         ID_VIEW_APPLOOK_VS_2005
+            MENUITEM "Visual Studio 200&8",         ID_VIEW_APPLOOK_VS_2008
+            POPUP "Office 200&7"
+            BEGIN
+                MENUITEM "&Blue Style",                 ID_VIEW_APPLOOK_OFF_2007_BLUE
+                MENUITEM "B&lack Style",                ID_VIEW_APPLOOK_OFF_2007_BLACK
+                MENUITEM "&Silver Style",               ID_VIEW_APPLOOK_OFF_2007_SILVER
+                MENUITEM "&Aqua Style",                 ID_VIEW_APPLOOK_OFF_2007_AQUA
+            END
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "&Options",                    ID_VIEW_OPTIONS
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About nrg...",               ID_APP_ABOUT
+    END
+END
+
+IDR_HELP_MENU MENU
+BEGIN
+    MENUITEM "&About nrg...",               ID_APP_ABOUT
+END
+
+IDR_THEME_MENU MENU
+BEGIN
+    MENUITEM "Office 2007 (&Blue Style)",   ID_VIEW_APPLOOK_OFF_2007_BLUE
+    MENUITEM "Office 2007 (B&lack Style)",  ID_VIEW_APPLOOK_OFF_2007_BLACK
+    MENUITEM "Office 2007 (&Silver Style)", ID_VIEW_APPLOOK_OFF_2007_SILVER
+    MENUITEM "Office 2007 (&Aqua Style)",   ID_VIEW_APPLOOK_OFF_2007_AQUA
+    MENUITEM "Win&dows 7",                  ID_VIEW_APPLOOK_WINDOWS_7
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About nrg"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,20,20
+    LTEXT           "nrg, Version 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_NRGPROPERTYPAGE DIALOGEX 0, 0, 291, 167
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_CAPTION
+CAPTION "NRG"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    RTEXT           "Number of iterations:",IDC_STATIC,15,16,69,8
+    EDITTEXT        IDC_EDIT1,87,15,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Number of kept states:",IDC_STATIC,9,38,75,8
+    EDITTEXT        IDC_EDIT2,87,36,40,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Lambda:",IDC_STATIC,56,60,28,8
+    EDITTEXT        IDC_EDIT3,87,57,40,14,ES_AUTOHSCROLL
+    GROUPBOX        "Model",IDC_STATIC,7,79,277,81
+    CONTROL         "Anderson",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,95,47,10
+    CONTROL         "Kondo",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,15,115,36,10
+    CONTROL         "Two quantum dots coupled by spin-spin interaction (RKKY)",IDC_RADIO3,
+                    "Button",BS_AUTORADIOBUTTON,15,135,202,10
+END
+
+IDD_PARAMETERSPROPERTYPAGE DIALOGEX 0, 0, 299, 171
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_CAPTION
+CAPTION "Parameters"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    RTEXT           "Coulomb interaction energy, U:",IDC_STATIC,17,14,101,8
+    EDITTEXT        IDC_EDIT1,123,12,50,14,ES_AUTOHSCROLL
+    RTEXT           "Epsilon:",IDC_STATIC,92,35,26,8
+    EDITTEXT        IDC_EDIT2,123,33,50,14,ES_AUTOHSCROLL
+    LTEXT           "For electron-hole symmetry, -U/2",IDC_STATIC,178,36,108,8
+    RTEXT           "Quantum dot - lead coupling, Delta:",IDC_STATIC,3,56,115,8
+    EDITTEXT        IDC_EDIT4,123,54,50,14,ES_AUTOHSCROLL
+    LTEXT           "Delta = pi V^2 / 2",IDC_STATIC,178,57,58,8
+    RTEXT           "Spin-spin interaction coupling, J:",IDC_STATIC,14,77,104,8
+    EDITTEXT        IDC_EDIT3,123,75,50,14,ES_AUTOHSCROLL
+    LTEXT           "Positive for antiferromagnetic",IDC_STATIC,178,78,96,8
+    RTEXT           "Magnetic field, B:",IDC_STATIC,62,98,56,8
+    EDITTEXT        IDC_EDIT5,123,96,50,14,ES_AUTOHSCROLL
+    GROUPBOX        "Spectral function",IDC_STATIC,7,115,285,49
+    RTEXT           "Broadening parameter, b:",IDC_STATIC,34,128,84,8
+    EDITTEXT        IDC_EDIT6,123,124,50,14,ES_AUTOHSCROLL
+    RTEXT           "Interval:",IDC_STATIC,89,146,29,8
+    EDITTEXT        IDC_EDIT7,123,144,50,14,ES_AUTOHSCROLL
+END
+
+IDD_CHARTSPROPERTYPAGE DIALOGEX 0, 0, 295, 138
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_CHILD | WS_CAPTION
+CAPTION "Charts"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Spectral function",IDC_STATIC,7,50,281,81
+    GROUPBOX        "Renormalization group flow",IDC_STATIC,7,7,281,36
+    RTEXT           "Energy Max:",IDC_STATIC,7,22,42,8
+    EDITTEXT        IDC_EDIT1,55,19,60,14,ES_AUTOHSCROLL
+    RTEXT           "Big Ticks No:",IDC_STATIC,129,22,41,8
+    EDITTEXT        IDC_EDIT2,175,19,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Small Ticks No:",IDC_STATIC,210,22,48,8
+    EDITTEXT        IDC_EDIT3,265,19,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Spectral Max:",IDC_STATIC,7,66,45,8
+    EDITTEXT        IDC_EDIT4,55,63,60,14,ES_AUTOHSCROLL
+    RTEXT           "Big Ticks No:",IDC_STATIC,129,64,41,8
+    EDITTEXT        IDC_EDIT5,175,61,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Small Ticks No:",IDC_STATIC,210,64,48,8
+    EDITTEXT        IDC_EDIT6,265,61,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Frequency Min:",IDC_STATIC,7,90,50,8
+    EDITTEXT        IDC_EDIT7,61,86,60,14,ES_AUTOHSCROLL
+    RTEXT           "Frequency Max:",IDC_STATIC,130,90,53,8
+    EDITTEXT        IDC_EDIT8,189,86,60,14,ES_AUTOHSCROLL
+    RTEXT           "Frequency Big Ticks No:",IDC_STATIC,7,115,77,8
+    EDITTEXT        IDC_EDIT9,89,111,23,14,ES_AUTOHSCROLL | ES_NUMBER
+    RTEXT           "Frequency Small Ticks No:",IDC_STATIC,174,115,84,8
+    EDITTEXT        IDC_EDIT10,265,111,23,14,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "FileDescription", "nrg"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "nrg.exe"
+            VALUE "OriginalFilename", "nrg.exe"
+            VALUE "ProductName", "NRG"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_NRGPROPERTYPAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 284
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_PARAMETERSPROPERTYPAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 292
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 164
+    END
+
+    IDD_CHARTSPROPERTYPAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 288
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_NRGPROPERTYPAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_ABOUTBOX AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_CHARTSPROPERTYPAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+IDD_PARAMETERSPROPERTYPAGE AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "nrg\n\nnrg\nnrg Files (*.xml)\n.xml\nnrg.Document\nnrg.Document"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "nrg"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_DIRECT    "Print the active document using current options\nQuick Print"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle Status Bar"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE
+BEGIN
+    IDS_STATUS_PANE1        "Pane 1"
+    IDS_STATUS_PANE2        "Pane 2"
+    IDS_TOOLBAR_STANDARD    "Standard"
+    IDS_TOOLBAR_CUSTOMIZE   "Customize..."
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_OPTIONS         "Display Options Property Sheet\nOptions"
+    ID_CALCULATE_START      "Start the calculation\nStart"
+    ID_CALCULATE_STOP       "Stop the calculation\nStop"
+END
+
+#endif    // English (United States) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#include "res\nrg.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"      // Standard components
+#include "afxprint.rc"    // printing/print preview resources
+#if !defined(_AFXDLL)
+#include "afxribbon.rc"        // MFC ribbon and control bar resources
+#endif
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
