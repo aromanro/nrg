@@ -2,6 +2,7 @@
 #include "SpectralOperator.h"
 
 #include <thread>
+#include <list>
 
 #include "nrg.h"
 #include "Options.h"
@@ -119,34 +120,39 @@ namespace NRG {
 	std::vector<std::pair<double, double>> SpectralOperator::GetSpectrum() const
 	{
 		std::vector<std::pair<double, double>> spectrum;
-		spectrum.reserve(negative_spectrum.size() + positive_spectrum.size());
 
-		double omega = -10;
-		if (negative_spectrum.size()) omega = round(negative_spectrum.front().first) - 1 - step/2;
+		double negative_limit = -10;
+		if (negative_spectrum.size()) negative_limit = round(negative_spectrum.front().first) - 1 - step / 2;
 
-		double value;
+		double positive_limit = 10;
+		if (positive_spectrum.size()) positive_limit = round(positive_spectrum.front().first) + 1 + step / 2;
+
+		unsigned int nrnegative = (unsigned int)ceill(abs(negative_limit) / step);
+		unsigned int nrpositive = (unsigned int)ceill(positive_limit / step);
+
+		spectrum.reserve(nrnegative + nrpositive);
 
 		//double integral = 0;
-		
-		for (; omega < 0.; omega += step)
+		double value, omega;
+
+		for (unsigned int pos = nrnegative; pos > 0; --pos)
 		{
+			omega = -step * pos;
 			value = Broaden(omega, negative_spectrum);
 			spectrum.push_back(std::make_pair(omega, value));
 
 			//integral += step * value;			
 		}
 
-		double max_omega = round(positive_spectrum.front().first) + 1 + step/2;
-
-
-		for (omega = (omega > step/2. && omega < step - 1e-5 ? abs(omega-step) : step); omega <= max_omega; omega += step)
+		for (unsigned int pos = 1; pos <= nrpositive; ++pos)
 		{
+			omega = step * pos;
 			value = Broaden(omega, positive_spectrum);
 			spectrum.push_back(std::make_pair(omega, value));
 
-			//integral += step * value;
+			//integral += step * value;			
 		}
-		
+
 		/*
 		CString str;
 		str.Format(L"Spectral sum: %f", integral);

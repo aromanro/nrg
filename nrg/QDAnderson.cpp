@@ -44,6 +44,13 @@ namespace NRG {
 		// need this operator for the spectral function
 		DUpOperator *up = new DUpOperator(curMatrixSize);
 		up->matrix.adjointInPlace();
+
+		/*
+		FDownOperator down(curMatrixSize);
+		down.matrix.adjointInPlace();
+		up->matrix += down.matrix;
+		*/
+
 		spectralOperators.push_back(up);
 	}
 }
