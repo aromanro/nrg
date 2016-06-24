@@ -35,7 +35,7 @@ The `NRGAlgorithm` class implements the NRG. From this class three examples are 
 
 The options are implemented by `Options` and they are saved/loaded into/from registry. The options UI are implemented by `COptionsPropertySheet`, `CNRGPropertyPage`, `CParametersPropertyPage` and `CChartsPropertyPage`.
 
-The charts are implemented by the `Charts` class. It's pretty messy and far from perfect, I might improve it in the future. It uses GDI+ for drawing. Flickering could be eliminated by various methods, I let it there because it offers better feedback that something is happening and besides, I was lazy. Maybe I'll fix it later.
+The charts are implemented by the `Chart` class. It's pretty messy and far from perfect, I might improve it in the future. It uses GDI+ for drawing. Flickering could be eliminated by various methods, I let it there because it offers better feedback that something is happening and besides, I was lazy. Maybe I'll fix it later.
 
 `CAboutBox` needs no explanation.
 
