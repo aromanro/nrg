@@ -7,23 +7,23 @@ Everything related with NRG is either in the NRG namespace or has the class name
 
 The rest of the program is very simple, just an interface to the NRG. It allows starting/stopping the computation, some configuration settings and it displays the charts. That's about it.
 
-TOOLS
+### TOOLS
 
 The project compiles on Windows with Visual Studio 2015.
 
-LIBRARIES
+### LIBRARIES
 
 Besides mfc and other typical VC++ runtime libraries, the program uses GDI+ for drawing.
 
 The program deals with matrices using Eigen: http://eigen.tuxfamily.org/index.php?title=Main_Page
 
-CLASSES
+### CLASSES
 
 The NRG Namespace:
 
 `ControllerInterface` and `ResultsRetrieverInterface` are interfaces that allow by deriving from them classes that respectively cancel calculation and get the results from it.
 
-The operators are derived from the `Operator` class. `Operator::Extend()` extends the operator by adding new states for the new Wilson site. Added states are in the most significant bits position. The `changeSign` member allows extending the operator matrix for fermionic operator type (if true) or bosonic operator type (if false). The minus sign there is due of <a href="https://en.wikipedia.org/wiki/Anticommutativity" target="blank_">anti-commutation</a>. Classes derived from it are: `Hamiltonian`, the hopping operators `FUpOperator` and `FDownOperator` and the spectral operator, `SpectralOperator`. This one is a regular operator with some methods added that allow calculating the spectral function for the operator. `DUpOperator` is the spectral operator that is used for generating the spectral function for the Anderson and two quantum dots models.
+The operators are derived from the `Operator` class. `Operator::Extend()` extends the operator by adding new states for the new Wilson site. Added states are in the most significant bits position. The `changeSign` member allows extending the operator matrix for fermionic operator type (if true) or bosonic operator type (if false). The minus sign there is due of anti-commutation. Classes derived from it are: `Hamiltonian`, the hopping operators `FUpOperator` and `FDownOperator` and the spectral operator, `SpectralOperator`. This one is a regular operator with some methods added that allow calculating the spectral function for the operator. `DUpOperator` is the spectral operator that is used for generating the spectral function for the Anderson and two quantum dots models.
 
 The `NRGAlgorithm` class implements the NRG. From this class three examples are derived: `QDAnderson`, a quantum dot with the Anderson model, `QDKondo`, a quantum dot with the Kondo model, `TwoQDRKKY`, two quantum dots coupled by spin-spin interaction, only one being coupled to the leads. The later should be considered only qualitatively, to have better precision one should use symmetries for calculation. Anyway, it's enough to show the split of the Kondo resonance due of the two stage Kondo effect.
 
@@ -35,7 +35,7 @@ The `NRGAlgorithm` class implements the NRG. From this class three examples are 
 
 The options are implemented by `Options` and they are saved/loaded into/from registry. The options UI are implemented by `COptionsPropertySheet`, `CNRGPropertyPage`, `CParametersPropertyPage` and `CChartsPropertyPage`.
 
-The charts are implemented by the `Chart` class. It's pretty messy and far from perfect, I might improve it in the future. It uses GDI+ for drawing. Flickering could be eliminated by various methods, I let it there because it offers better feedback that something is happening and besides, I was lazy. Maybe I'll fix it later.
+The charts are implemented by the `Chart` class. It's pretty messy and far from perfect, I might improve it in the future. It uses GDI+ for drawing.
 
 `CAboutBox` needs no explanation.
 
