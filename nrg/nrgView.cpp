@@ -69,17 +69,6 @@ void CnrgView::OnDraw(CDC* pDC)
 	CRect rect;
 	GetClientRect(rect);
 	
-	/*
-	CDC memDC;
-	memDC.CreateCompatibleDC(pDC);
-	CBitmap bmp;
-	bmp.CreateCompatibleBitmap(&memDC, rect.Width(), rect.Height());
-	memDC.SelectObject(&bmp);
-	CBrush brushWhite(RGB(255, 255, 255));
-	memDC.SelectObject(&brushWhite);
-	memDC.Rectangle(rect);
-	*/
-
 	CRect rect1(rect);
 	CRect rect2(rect);
 	rect1.bottom = rect1.top + rect1.Height() / 2;
@@ -89,8 +78,6 @@ void CnrgView::OnDraw(CDC* pDC)
 	rect2.top = rect2.top + rect2.Height() / 2;
 
 	pDoc->m_SpectralFunctionChart.Draw(pDC, rect2);
-
-	//BitBlt(pDC->GetSafeHdc(), 0, 0, rect.Width(), rect.Height(), memDC.GetSafeHdc(), 0, 0, SRCCOPY);
 }
 
 
