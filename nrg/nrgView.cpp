@@ -31,6 +31,7 @@ BEGIN_MESSAGE_MAP(CnrgView, CView)
 	ON_WM_DESTROY()
 	ON_WM_TIMER()
 	ON_WM_SETCURSOR()
+	ON_WM_ERASEBKGND()
 END_MESSAGE_MAP()
 
 // CnrgView construction/destruction
@@ -67,17 +68,29 @@ void CnrgView::OnDraw(CDC* pDC)
 	
 	CRect rect;
 	GetClientRect(rect);
+	
+	/*
+	CDC memDC;
+	memDC.CreateCompatibleDC(pDC);
+	CBitmap bmp;
+	bmp.CreateCompatibleBitmap(&memDC, rect.Width(), rect.Height());
+	memDC.SelectObject(&bmp);
+	CBrush brushWhite(RGB(255, 255, 255));
+	memDC.SelectObject(&brushWhite);
+	memDC.Rectangle(rect);
+	*/
 
 	CRect rect1(rect);
 	CRect rect2(rect);
-	rect1.bottom = rect1.top + rect1.Height()/2;
+	rect1.bottom = rect1.top + rect1.Height() / 2;
 
 	pDoc->m_RenormalizationFlowChart.Draw(pDC, rect1);
 	
-
 	rect2.top = rect2.top + rect2.Height() / 2;
 
 	pDoc->m_SpectralFunctionChart.Draw(pDC, rect2);
+
+	//BitBlt(pDC->GetSafeHdc(), 0, 0, rect.Width(), rect.Height(), memDC.GetSafeHdc(), 0, 0, SRCCOPY);
 }
 
 
@@ -218,4 +231,14 @@ BOOL CnrgView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 	}
 
 	return CView::OnSetCursor(pWnd, nHitTest, message);
+}
+
+
+BOOL CnrgView::OnEraseBkgnd(CDC* pDC)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	//return CView::OnEraseBkgnd(pDC);
+
+	return TRUE;
 }
