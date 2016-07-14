@@ -370,7 +370,7 @@ std::list<CString> Chart::GetXLabels()
 
 	int ticks = X.GetNumBigTicks();
 
-	float interval = (xmax - xmin) / ticks;
+	float interval = abs (xmax - xmin) / ticks;
 
 	for (int i = (drawStartTickX ? 0 : 1); i <= ticks; ++i)
 	{
@@ -394,7 +394,7 @@ std::list<CString> Chart::GetYLabels()
 
 	int ticks = Y.GetNumBigTicks();
 
-	float interval = (ymax - ymin) / ticks;
+	float interval = abs (ymax - ymin) / ticks;
 
 
 	for (int i = (drawStartTickY ? 0 : 1); i <= ticks; ++i)
