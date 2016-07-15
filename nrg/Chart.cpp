@@ -3,7 +3,7 @@
 
 
 Chart::Axis::Axis(Chart *p, bool isx)
-	: parent(p), numTicks(-1), isX(isx)
+	: parent(p), numTicks(-1), numBigTicks(-1), isX(isx)
 {
 }
 
@@ -154,7 +154,7 @@ void Chart::Axis::DrawGrid(Gdiplus::Graphics& g, Gdiplus::Point& start, int leng
 	Gdiplus::Pen pen((Gdiplus::ARGB)Gdiplus::Color::LightGray);
 	//pen.SetDashStyle(DashStyle::DashStyleDashDot);
 
-	float pattern[] = { 6, 2, 3, 2 };
+	static const float pattern[] = { 6, 2, 3, 2 };
 	pen.SetDashPattern(pattern, 4);
 
 	Gdiplus::Point pt = start;
