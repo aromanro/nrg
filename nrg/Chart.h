@@ -21,17 +21,18 @@ protected:
 
 		void DrawTicks(Gdiplus::Graphics& g, Gdiplus::Point& start, int length);
 		void DrawGrid(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2);
-		void DrawLabels(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2);
+		void DrawLabels(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, float fontSize = 0);
 	public:
 		Axis(Chart* parent, bool isX);
 
 		int GetNumBigTicks() const;
 
-		void Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2);
+		void Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2, float fontSize = 0);
 		void SetNumTicks(int ticks) { numTicks = ticks; }
 		void SetNumBigTicks(int ticks) { numBigTicks = ticks; }
 
 		void SetLabels(const std::list<CString>& l) { labels = l; }
+		std::list<CString> GetLabels() const;
 	};
 
 	Axis X;
@@ -45,12 +46,12 @@ protected:
 	std::list<CString> GetXLabels();
 	std::list<CString> GetYLabels();
 
-	float GetLabelHeight() const;
-	float GetLabelWidth() const;
+	float GetLabelHeight(bool XAxis = true) const;
+	float GetLabelWidth(bool XAxis = true) const;
 
 	int GetNeededFontSize(CString& str, Gdiplus::Graphics& g, Gdiplus::RectF& boundRect);
 
-	void DrawText(CString &str, Gdiplus::Graphics& g, Gdiplus::RectF& boundRect, Gdiplus::StringAlignment align = Gdiplus::StringAlignmentCenter);
+	void DrawText(CString &str, Gdiplus::Graphics& g, Gdiplus::RectF& boundRect, Gdiplus::StringAlignment align = Gdiplus::StringAlignmentCenter, float fontSize = 0);
 public:
 	Chart();
 	~Chart();
@@ -122,5 +123,6 @@ public:
 
 	int maxTitleHeight;
 	int maxAxisLabelHeight;
+	int maxLabelHeight;
 };
 

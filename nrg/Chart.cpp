@@ -7,7 +7,7 @@ Chart::Axis::Axis(Chart *p, bool isx)
 {
 }
 
-void Chart::Axis::Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2)
+void Chart::Axis::Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2, float fontSize)
 {
 	Gdiplus::Pen *pen = new Gdiplus::Pen((Gdiplus::ARGB)Gdiplus::Color::Black);
 	pen->SetWidth(2);
@@ -32,7 +32,7 @@ void Chart::Axis::Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, 
 	if ((isX && parent->XAxisGrid) || (!isX && parent->YAxisGrid))
 		DrawGrid(g, start, length, length2);
 
-	DrawLabels(g, start, length, length2);
+	DrawLabels(g, start, length, fontSize);
 }
 
 int Chart::Axis::GetNumTicks() const
@@ -90,32 +90,31 @@ void Chart::Axis::DrawTicks(Gdiplus::Graphics& g, Gdiplus::Point& start, int len
 	}
 }
 
+std::list<CString> Chart::Axis::GetLabels() const
+{
+	if (labels.size()) return labels;
+	else if (isX) return parent->GetXLabels();
+	
+	return parent->GetYLabels();
+}
 
-void Chart::Axis::DrawLabels(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int /*length2*/)
+void Chart::Axis::DrawLabels(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, float fontSize)
 {
 	Gdiplus::GraphicsState state = g.Save();
 
 	if (!isX) g.ScaleTransform(1, -1);
 
-	std::list<CString> fromParent;
-	std::list<CString> &l = labels;
-	if (0 == l.size())
-	{
-		if (isX) fromParent = parent->GetXLabels();
-		else fromParent = parent->GetYLabels();
-		
-		if (0 == fromParent.size()) return;
-		
-		l = fromParent;
-	}
+	std::list<CString> l = GetLabels();
+
+	if (0 == l.size()) return;
 
 	int nrticks = GetNumBigTicks();
 	double ticklen = ((double)length) / ((double)nrticks);
 
 	Gdiplus::RectF rect;
 	
-	rect.Height = min(parent->GetLabelHeight(), 20);
-	rect.Width = (float)min(ticklen*0.9, parent->GetLabelWidth());
+	rect.Height = parent->GetLabelHeight(isX);
+	rect.Width = parent->GetLabelWidth(isX);
 
 	if (isX) {
 		rect.X = -(float)(rect.Width/2.) - (float)(ShouldDrawFirstTick() ? ticklen : 0);
@@ -136,7 +135,7 @@ void Chart::Axis::DrawLabels(Gdiplus::Graphics& g, Gdiplus::Point& start, int le
 		if (!isX) g.RotateTransform(90.);
 
 		// draw the label...
-		parent->DrawText(*label, g, rect, isX ? Gdiplus::StringAlignment::StringAlignmentCenter : Gdiplus::StringAlignment::StringAlignmentFar);
+		parent->DrawText(*label, g, rect, isX ? Gdiplus::StringAlignment::StringAlignmentCenter : Gdiplus::StringAlignment::StringAlignmentFar, fontSize);
 
 		if (!isX) g.RotateTransform(-90.);
 
@@ -316,7 +315,7 @@ Chart::Chart()
 	: X(this, true), Y(this, false), XAxisGrid(true), YAxisGrid(true),
 	XAxisMin(DBL_MIN), XAxisMax(DBL_MAX), YAxisMin(DBL_MIN), YAxisMax(DBL_MAX),
 	useSpline(true), antialias(false), drawStartTickX(true), drawStartTickY(true),
-	maxTitleHeight(48), maxAxisLabelHeight(38)
+	maxTitleHeight(36), maxAxisLabelHeight(28), maxLabelHeight(18)
 {
 }
 
@@ -338,24 +337,26 @@ int Chart::GetNumBigTicks()
 }
 
 
-float Chart::GetLabelHeight() const
+float Chart::GetLabelHeight(bool XAxis) const
 {
-	int nrticks = Y.GetNumBigTicks();
-	double ticklenY = ((double)chartRect.Height()) / ((double)nrticks);
+	if (XAxis) return (float)min(chartRect.Height() / 10., maxLabelHeight);
 
-	float height = (float)min(min(chartRect.Width(), chartRect.Height()) / 10., ticklenY);
-	
-	return min(height, maxAxisLabelHeight);
+	int nrticks = Y.GetNumBigTicks();
+
+	return (float)min((((double)chartRect.Height()) / ((double)nrticks)), maxLabelHeight);
 }
 
-float Chart::GetLabelWidth() const
+float Chart::GetLabelWidth(bool XAxis) const
 {
-	int nrticks = X.GetNumBigTicks();
-	double ticklenX = ((double)chartRect.Width()) / ((double)nrticks);
-	
-	float width = (float)ticklenX;
+	if (XAxis)
+	{
+		int nrticks = X.GetNumBigTicks();
+		double ticklen = ((double)chartRect.Width()) / ((double)nrticks);
 
-	return width;
+		return (float)ticklen;
+	}
+
+	return  (float)(chartRect.Width() / 10.);
 }
 
 
@@ -432,9 +433,10 @@ int Chart::GetNeededFontSize(CString& str, Gdiplus::Graphics& g, Gdiplus::RectF&
 	return (int)floor(minSize);
 }
 
-void Chart::DrawText(CString &str, Gdiplus::Graphics& g, Gdiplus::RectF& boundRect, Gdiplus::StringAlignment align)
+void Chart::DrawText(CString &str, Gdiplus::Graphics& g, Gdiplus::RectF& boundRect, Gdiplus::StringAlignment align, float fontSize)
 {
-	Gdiplus::Font font(L"Arial", (float)GetNeededFontSize(str, g, boundRect));
+	if (fontSize == 0) fontSize = (float)GetNeededFontSize(str, g, boundRect);
+	Gdiplus::Font font(L"Arial", fontSize);
 
 	Gdiplus::SolidBrush brush((Gdiplus::ARGB)Gdiplus::Color::Black);
 	Gdiplus::StringFormat format;
@@ -478,22 +480,37 @@ void Chart::Draw(CDC* pDC, CRect& rect)
 
 	chartRect = rect;
 
+	// try to find out the labels font size
+	Gdiplus::RectF labelBound(0,0,GetLabelWidth(true),GetLabelHeight(true));
+
+	float fontSize = (float)maxLabelHeight;
+	std::list<CString> labels = X.GetLabels();
+	for (auto label : labels)
+		fontSize = min(fontSize, (float)GetNeededFontSize(label, g, labelBound));
+	
+	labelBound.Width = GetLabelWidth(false);
+	labelBound.Height = GetLabelHeight(false);
+	labels = Y.GetLabels();
+	for (auto label : labels)
+		fontSize = min(fontSize, (float)GetNeededFontSize(label, g, labelBound));
+
+
 	// draw horizontal axis
 	g.TranslateTransform((float)rect.left, (float)rect.bottom);
 	Gdiplus::Point zero(0, 0);
-	X.Draw(g, zero, rect.Width(), rect.Height());
+	X.Draw(g, zero, rect.Width(), rect.Height(), fontSize);
 
 	g.ScaleTransform(1,-1);
 	g.RotateTransform(90.);
 
-	Y.Draw(g, zero, rect.Height(), rect.Width());
+	Y.Draw(g, zero, rect.Height(), rect.Width(), fontSize);
 
 	g.ResetTransform();
 
 	// draw X label
 	if (XAxisLabel.GetLength())
 	{
-		Gdiplus::RectF labelBound((float)rect.left, (float)(rect.top + rect.Height() + rect.Height()/8.), (float)rect.Width(), min((float)(min(rect.Width(),rect.Height()) / 10.), maxAxisLabelHeight));
+		Gdiplus::RectF labelBound((float)rect.left, (float)(rect.top + rect.Height() + rect.Height()/8.), (float)rect.Width(), min((float)(min(rect.Width(),rect.Height()) / 12.), maxAxisLabelHeight));
 		DrawText(XAxisLabel, g, labelBound);
 	}
 
@@ -502,7 +519,7 @@ void Chart::Draw(CDC* pDC, CRect& rect)
 	{
 		g.TranslateTransform((float)rect.left, (float)rect.bottom);
 		g.RotateTransform(-90.);
-		Gdiplus::RectF labelBound((float)(rect.Height() / 10.), -(float)leftSide , (float)rect.Height(), min((float)(min(rect.Width(), rect.Height()) / 10.), maxAxisLabelHeight));
+		Gdiplus::RectF labelBound((float)(rect.Height() / 10.), -(float)leftSide , (float)rect.Height(), min((float)(min(rect.Width(), rect.Height()) / 12.), maxAxisLabelHeight));
 		DrawText(YAxisLabel, g, labelBound);
 	}
 
