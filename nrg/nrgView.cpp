@@ -221,7 +221,7 @@ BOOL CnrgView::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 }
 
 
-BOOL CnrgView::OnEraseBkgnd(CDC* pDC)
+BOOL CnrgView::OnEraseBkgnd(CDC* /*pDC*/)
 {
 	// TODO: Add your message handler code here and/or call default
 
