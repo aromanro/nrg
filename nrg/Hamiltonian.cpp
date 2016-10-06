@@ -20,14 +20,8 @@ namespace NRG {
 		// the eigenvectors are normalized
 		// the SelfAdjointEigenSolver diagonalization from Eigen takes care of those
 		// for another solver, sorting needs to be done afterwards
-
-		Eigen::VectorXd eigenvals = eigenvalues();
-
-		unsigned int size = (unsigned int)eigenvals.size();
-		matrix = Eigen::MatrixXd::Zero(size, size);
-				
-		for (unsigned int i = 0; i < size; ++i)
-			matrix(i, i) = eigenvals(i);
+		
+		matrix = eigenvalues().asDiagonal();
 	}
 }
 
