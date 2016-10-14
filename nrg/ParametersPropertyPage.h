@@ -4,7 +4,7 @@
 
 // CParametersPropertyPage dialog
 
-class CParametersPropertyPage : public CPropertyPage
+class CParametersPropertyPage : public CMFCPropertyPage
 {
 	DECLARE_DYNAMIC(CParametersPropertyPage)
 

@@ -4,7 +4,7 @@
 
 // CNRGPropertyPage dialog
 
-class CNRGPropertyPage : public CPropertyPage
+class CNRGPropertyPage : public CMFCPropertyPage
 {
 	DECLARE_DYNAMIC(CNRGPropertyPage)
 

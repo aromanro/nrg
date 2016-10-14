@@ -11,10 +11,10 @@
 
 // CChartsPropertyPage dialog
 
-IMPLEMENT_DYNAMIC(CChartsPropertyPage, CPropertyPage)
+IMPLEMENT_DYNAMIC(CChartsPropertyPage, CMFCPropertyPage)
 
 CChartsPropertyPage::CChartsPropertyPage()
-	: CPropertyPage(IDD_CHARTSPROPERTYPAGE)	
+	: CMFCPropertyPage(IDD_CHARTSPROPERTYPAGE)	
 {
 	YMaxFlow = theApp.options.YMaxFlow;
 	YMaxSpectral = theApp.options.YMaxSpectral;
@@ -34,7 +34,7 @@ CChartsPropertyPage::~CChartsPropertyPage()
 
 void CChartsPropertyPage::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+	CMFCPropertyPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT1, m_EnergyEdit);
 	DDX_Control(pDX, IDC_EDIT4, m_SpectralMaxEdit);
 	DDX_Control(pDX, IDC_EDIT7, m_FrequencyMinEdit);
@@ -53,7 +53,7 @@ void CChartsPropertyPage::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CChartsPropertyPage, CPropertyPage)
+BEGIN_MESSAGE_MAP(CChartsPropertyPage, CMFCPropertyPage)
 	ON_EN_CHANGE(IDC_EDIT1, &CChartsPropertyPage::OnEnChangeEdit)
 	ON_EN_CHANGE(IDC_EDIT2, &CChartsPropertyPage::OnEnChangeEdit)
 	ON_EN_CHANGE(IDC_EDIT3, &CChartsPropertyPage::OnEnChangeEdit)
@@ -76,13 +76,13 @@ BOOL CChartsPropertyPage::OnApply()
 
 	ApplyValues();
 
-	return CPropertyPage::OnApply();
+	return CMFCPropertyPage::OnApply();
 }
 
 
 BOOL CChartsPropertyPage::OnInitDialog()
 {
-	CPropertyPage::OnInitDialog();
+	CMFCPropertyPage::OnInitDialog();
 
 	m_EnergyEdit.allowNegative = false;
 	m_SpectralMaxEdit.allowNegative = false;
@@ -112,7 +112,7 @@ void CChartsPropertyPage::ApplyValues()
 void CChartsPropertyPage::OnEnChangeEdit()
 {
 	// TODO:  If this is a RICHEDIT control, the control will not
-	// send this notification unless you override the CPropertyPage::OnInitDialog()
+	// send this notification unless you override the CMFCPropertyPage::OnInitDialog()
 	// function and call CRichEditCtrl().SetEventMask()
 	// with the ENM_CHANGE flag ORed into the mask.
 

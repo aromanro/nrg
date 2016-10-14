@@ -10,10 +10,10 @@
 
 // CNRGPropertyPage dialog
 
-IMPLEMENT_DYNAMIC(CNRGPropertyPage, CPropertyPage)
+IMPLEMENT_DYNAMIC(CNRGPropertyPage, CMFCPropertyPage)
 
 CNRGPropertyPage::CNRGPropertyPage()
-	: CPropertyPage(IDD_NRGPROPERTYPAGE)
+	: CMFCPropertyPage(IDD_NRGPROPERTYPAGE)
 {
 	iterationsNumber = theApp.options.iterationsNumber;
 	keptStates = theApp.options.keptStates;
@@ -27,7 +27,7 @@ CNRGPropertyPage::~CNRGPropertyPage()
 
 void CNRGPropertyPage::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+	CMFCPropertyPage::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT3, m_numberEdit);
 	DDX_Radio(pDX, IDC_RADIO1, model);
 
@@ -41,7 +41,7 @@ void CNRGPropertyPage::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CNRGPropertyPage, CPropertyPage)
+BEGIN_MESSAGE_MAP(CNRGPropertyPage, CMFCPropertyPage)
 	ON_EN_CHANGE(IDC_EDIT1, &CNRGPropertyPage::OnEnChangeEdit)
 	ON_EN_CHANGE(IDC_EDIT2, &CNRGPropertyPage::OnEnChangeEdit)
 	ON_EN_CHANGE(IDC_EDIT3, &CNRGPropertyPage::OnEnChangeEdit)
@@ -71,13 +71,13 @@ BOOL CNRGPropertyPage::OnApply()
 
 	ApplyValues();
 
-	return CPropertyPage::OnApply();
+	return CMFCPropertyPage::OnApply();
 }
 
 
 BOOL CNRGPropertyPage::OnInitDialog()
 {
-	CPropertyPage::OnInitDialog();
+	CMFCPropertyPage::OnInitDialog();
 
 	// TODO:  Add extra initialization here
 	m_numberEdit.allowNegative = false;

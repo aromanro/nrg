@@ -9,10 +9,10 @@
 
 // CParametersPropertyPage dialog
 
-IMPLEMENT_DYNAMIC(CParametersPropertyPage, CPropertyPage)
+IMPLEMENT_DYNAMIC(CParametersPropertyPage, CMFCPropertyPage)
 
 CParametersPropertyPage::CParametersPropertyPage()
-	: CPropertyPage(IDD_PARAMETERSPROPERTYPAGE)
+	: CMFCPropertyPage(IDD_PARAMETERSPROPERTYPAGE)
 {
 	U = theApp.options.U;
 	eps = theApp.options.eps;
@@ -30,7 +30,7 @@ CParametersPropertyPage::~CParametersPropertyPage()
 
 void CParametersPropertyPage::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+	CMFCPropertyPage::DoDataExchange(pDX);
 
 	DDX_Control(pDX, IDC_EDIT1, m_UEdit);
 	DDX_Control(pDX, IDC_EDIT2, m_epsEdit);
@@ -54,7 +54,7 @@ void CParametersPropertyPage::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CParametersPropertyPage, CPropertyPage)
+BEGIN_MESSAGE_MAP(CParametersPropertyPage, CMFCPropertyPage)
 	ON_EN_CHANGE(IDC_EDIT1, &CParametersPropertyPage::OnEnChangeEdit)
 	ON_EN_CHANGE(IDC_EDIT2, &CParametersPropertyPage::OnEnChangeEdit)
 	ON_EN_CHANGE(IDC_EDIT3, &CParametersPropertyPage::OnEnChangeEdit)
@@ -74,13 +74,13 @@ BOOL CParametersPropertyPage::OnApply()
 
 	ApplyValues();
 
-	return CPropertyPage::OnApply();
+	return CMFCPropertyPage::OnApply();
 }
 
 
 BOOL CParametersPropertyPage::OnInitDialog()
 {
-	CPropertyPage::OnInitDialog();
+	CMFCPropertyPage::OnInitDialog();
 
 	// TODO:  Add extra initialization here
 	m_UEdit.allowNegative = false;
