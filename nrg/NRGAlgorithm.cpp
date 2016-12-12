@@ -26,9 +26,9 @@ namespace NRG {
 	{
 		return (1. - pow(Lambda, -iter - 1.)) / sqrt((1. - pow(Lambda, -2 * iter - 1))*(1. - pow(Lambda, -2 * iter - 3)));
 	}
-	
-	void NRGAlgorithm::Step(int iter)
-	{		
+
+	void NRGAlgorithm::AddSite()
+	{
 		// diagonal blocks: sqrt(Lambda) * Hamiltonian
 		hamiltonian.matrix *= SqrtLambda;
 		hamiltonian.Extend(); //now the size is 4 * curMatrixSize
@@ -52,13 +52,15 @@ namespace NRG {
 		// last 'row'
 		hamiltonian.matrix.block(3 * curMatrixSize, curMatrixSize, curMatrixSize, curMatrixSize) = t * fDownOperator.matrix;
 		hamiltonian.matrix.block(3 * curMatrixSize, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = -t * fUpOperator.matrix;
+	}
 
-
+	
+	void NRGAlgorithm::Step(int iter)
+	{		
+		AddSite();
 
 		int enlargedMatrixSize = 4 * curMatrixSize;
 		int nextMatrixSize = min(enlargedMatrixSize, maxSize);
-
-
 
 		// diagonalize the hamiltonian
 		// the eigenvalues and eigenvectors are already sorted

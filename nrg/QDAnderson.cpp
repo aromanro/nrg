@@ -5,6 +5,8 @@
 #include "nrg.h"
 #include "Options.h"
 
+
+
 namespace NRG {
 
 	QDAnderson::QDAnderson(int nrsteps, int maxSize, double Lambda)

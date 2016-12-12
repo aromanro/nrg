@@ -3,7 +3,6 @@
 
 #include "SpectralOperator.h"
 
-#include <eigen>
 
 NRGResultsData::NRGResultsData()
 	: spectralChart(NULL), finished(true)

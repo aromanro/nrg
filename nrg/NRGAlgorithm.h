@@ -1,6 +1,5 @@
 #pragma once
 
-#include <eigen>
 #include <vector>
 
 #include "Operator.h"
@@ -49,6 +48,8 @@ namespace NRG {
 
 		double GetCouplingForIteration(int iter);
 		void AdjustForEnergyScale();
+
+		void AddSite();
 		void Step(int iter);
 	public:
 		NRGAlgorithm(int nrsteps = 50, int maxSize = 200, double Lambda = 2., int startHamiltonianSize = 4);
