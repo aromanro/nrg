@@ -34,24 +34,27 @@ namespace NRG {
 		hamiltonian.Extend(); //now the size is 4 * curMatrixSize
 
 		// off diagonal blocks
-		Eigen::MatrixXd fUpOperatorTmatrix = fUpOperator.matrix.adjoint();
-		Eigen::MatrixXd fDownOperatorTmatrix = fDownOperator.matrix.adjoint();
+		const Eigen::MatrixXd fUpOperatormatrix = t * fUpOperator.matrix;
+		const Eigen::MatrixXd fDownOperatormatrix = t * fDownOperator.matrix;
+		
+		const Eigen::MatrixXd fUpOperatorTmatrix = fUpOperatormatrix.adjoint();
+		const Eigen::MatrixXd fDownOperatorTmatrix = fDownOperatormatrix.adjoint();
 
 		//first 'row'
-		hamiltonian.matrix.block(0, curMatrixSize, curMatrixSize, curMatrixSize) = t * fUpOperatorTmatrix;
-		hamiltonian.matrix.block(0, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = t * fDownOperatorTmatrix;
+		hamiltonian.matrix.block(0, curMatrixSize, curMatrixSize, curMatrixSize) = fUpOperatorTmatrix;
+		hamiltonian.matrix.block(0, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatorTmatrix;
 
 		// second 'row'
-		hamiltonian.matrix.block(curMatrixSize, 0, curMatrixSize, curMatrixSize) = t * fUpOperator.matrix;
-		hamiltonian.matrix.block(curMatrixSize, 3 * curMatrixSize, curMatrixSize, curMatrixSize) = t * fDownOperatorTmatrix;
+		hamiltonian.matrix.block(curMatrixSize, 0, curMatrixSize, curMatrixSize) = fUpOperatormatrix;
+		hamiltonian.matrix.block(curMatrixSize, 3 * curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatorTmatrix;
 
 		// third 'row'
-		hamiltonian.matrix.block(2 * curMatrixSize, 0, curMatrixSize, curMatrixSize) = t * fDownOperator.matrix;
-		hamiltonian.matrix.block(2 * curMatrixSize, 3 * curMatrixSize, curMatrixSize, curMatrixSize) = -t * fUpOperatorTmatrix;
+		hamiltonian.matrix.block(2 * curMatrixSize, 0, curMatrixSize, curMatrixSize) = fDownOperatormatrix;
+		hamiltonian.matrix.block(2 * curMatrixSize, 3 * curMatrixSize, curMatrixSize, curMatrixSize) = -fUpOperatorTmatrix;
 
 		// last 'row'
-		hamiltonian.matrix.block(3 * curMatrixSize, curMatrixSize, curMatrixSize, curMatrixSize) = t * fDownOperator.matrix;
-		hamiltonian.matrix.block(3 * curMatrixSize, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = -t * fUpOperator.matrix;
+		hamiltonian.matrix.block(3 * curMatrixSize, curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatormatrix;
+		hamiltonian.matrix.block(3 * curMatrixSize, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = -fUpOperatormatrix;
 	}
 
 	

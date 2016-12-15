@@ -8,7 +8,7 @@
 #endif // !M_PI
 
 
-#include <eigen>
+#include <Eigen/eigen>
 
 namespace NRG {
 
