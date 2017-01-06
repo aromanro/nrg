@@ -40,7 +40,7 @@ namespace NRG {
 	{
 		double result = 0;
 
-		for (auto &&val : spectrum)
+		for (const auto &val : spectrum)
 			result += val.second * LogGauss(omega, val.first);
 
 		return result;
@@ -84,6 +84,7 @@ namespace NRG {
 
 		std::thread thread1, thread2;
 
+		// if passed spectrum overlaps with the existing one
 		if (min_energy_before <= max_energy_current)
 		{
 			//walk over old spectrums and adjust
@@ -96,6 +97,7 @@ namespace NRG {
 
 		double weight;
 
+		// also adjust the new passed spectrum
 		for (unsigned int i = 0; i < nrvals; ++i)
 		{
 			double omega = EnergyScale * evals(i) - ground;
@@ -136,6 +138,8 @@ namespace NRG {
 
 		//double integral = 0;
 		double value, omega;
+
+		// spectral lines broadening
 
 		for (unsigned int pos = nrnegative; pos > 0; --pos)
 		{
