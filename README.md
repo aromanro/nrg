@@ -7,6 +7,9 @@ Everything related with NRG is either in the NRG namespace or has the class name
 
 The rest of the program is very simple, just an interface to the NRG. It allows starting/stopping the computation, some configuration settings and it displays the charts. That's about it.
 
+### PROGRAM IN ACTION
+
+[![Program video](https://img.youtube.com/vi/rZFpruv99ww/0.jpg)](https://youtu.be/rZFpruv99ww)
 ### TOOLS
 
 The project compiles on Windows with Visual Studio 2015.
