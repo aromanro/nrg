@@ -1,7 +1,7 @@
 # nrg
 A simple program implementing the numerical renormalization group
 
-A more detailed description of the project is on the computational physics blog: http://compphys.go.ro/the-numerical-renormalization-group/
+A more detailed description of the project is on the computational physics blog: https://compphys.go.ro/the-numerical-renormalization-group/
 
 Everything related with NRG is either in the NRG namespace or has the class name starting with NRG. There are three kind of classes for NRG implementation, one is dealing with data passing around and adjusting and controlling the algorithm running, one is the operators, derived from the `Operator` abstract class and one is the NRG algorithms, derived from the abstract class `NRGAlgorithm`.
 
