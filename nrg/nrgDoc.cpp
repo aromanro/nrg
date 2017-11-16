@@ -165,7 +165,7 @@ void CnrgDoc::Dump(CDumpContext& dc) const
 
 bool CnrgDoc::Tick()
 {
-	bool res = computationData.TransferToChart(m_RenormalizationFlowChart);
+	const bool res = computationData.TransferToChart(m_RenormalizationFlowChart);
 
 	if (computationData.isFinished())
 		return true;
@@ -229,7 +229,7 @@ void CnrgDoc::SetupCharts()
 	m_RenormalizationFlowChart.XAxisMax = theApp.options.iterationsNumber;
 	m_RenormalizationFlowChart.YAxisMax = theApp.options.YMaxFlow;
 
-	int bigTicks = (int)ceill(theApp.options.iterationsNumber / 10.);
+	const int bigTicks = static_cast<int>(ceill(theApp.options.iterationsNumber / 10.));
 	m_RenormalizationFlowChart.SetNumBigTicksX(bigTicks);
 	m_RenormalizationFlowChart.SetNumTicksX(bigTicks*2); // for now
 
@@ -265,7 +265,7 @@ CnrgView* CnrgDoc::GetView()
 	{
 		CView* pView = GetNextView(pos);
 		if (pView->IsKindOf(RUNTIME_CLASS(CnrgView)))
-			return (CnrgView*)pView;
+			return dynamic_cast<CnrgView*>(pView);
 	}
 
 	return NULL;

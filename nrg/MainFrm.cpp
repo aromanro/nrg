@@ -63,8 +63,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWndEx::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	BOOL bNameValid;
-
 	if (!m_wndMenuBar.Create(this))
 	{
 		TRACE0("Failed to create menubar\n");
@@ -84,7 +82,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	}
 
 	CString strToolBarName;
-	bNameValid = strToolBarName.LoadString(IDS_TOOLBAR_STANDARD);
+	BOOL bNameValid = strToolBarName.LoadString(IDS_TOOLBAR_STANDARD);
 	ASSERT(bNameValid);
 	m_wndToolBar.SetWindowText(strToolBarName);
 
@@ -402,7 +400,7 @@ CnrgDoc* CMainFrame::GetDocument()
 	CWnd* pWndMain = AfxGetMainWnd();
 
 	if (pWndMain)
-		return (CnrgDoc*)(((CFrameWnd*)pWndMain)->GetActiveDocument());
+		return dynamic_cast<CnrgDoc*>(dynamic_cast<CFrameWnd*>(pWndMain)->GetActiveDocument());
 
 	return nullptr;
 }

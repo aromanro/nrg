@@ -18,8 +18,8 @@ namespace NRG {
 	void Operator::Extend()
 	{
 		Eigen::MatrixXd newop;
-		unsigned int oldsize = (unsigned int)matrix.rows();
-		unsigned int newsize = 4 * oldsize;
+		const unsigned int oldsize = static_cast<unsigned int>(matrix.rows());
+		const unsigned int newsize = 4 * oldsize;
 
 		newop = Eigen::MatrixXd::Zero(newsize, newsize);
 

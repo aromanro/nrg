@@ -136,7 +136,7 @@ void CnrgView::Dump(CDumpContext& dc) const
 CnrgDoc* CnrgView::GetDocument() const // non-debug version is inline
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CnrgDoc)));
-	return (CnrgDoc*)m_pDocument;
+	return dynamic_cast<CnrgDoc*>(m_pDocument);
 }
 #endif //_DEBUG
 

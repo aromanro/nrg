@@ -39,8 +39,8 @@ bool NRGResultsData::TransferToChart(Chart& chart)
 
 	if (data.size() == 0) return false;
 
-	for (auto &&obj : data)
-		chart.AddDataSlice(obj.first, obj.second.data(), (unsigned int)obj.second.size());
+	for (const auto &obj : data)
+		chart.AddDataSlice(obj.first, obj.second.data(), static_cast<unsigned int>(obj.second.size()));
 
 	data.clear();
 

@@ -30,7 +30,7 @@ namespace NRG {
 	{
 		ASSERT((omega < 0 && omegaN < 0) || (omega > 0 && omegaN > 0));
 		
-		double lndif = log(abs(omega)) - log(abs(omegaN));
+		const double lndif = log(abs(omega)) - log(abs(omegaN));
 
 		return exp(-b2 / 4.) / (b * abs(omega) * sqrt(M_PI)) * exp(-lndif * lndif / b2);
 	}
@@ -48,17 +48,17 @@ namespace NRG {
 
 	void SpectralOperator::AdjustSpectrum(double min_energy_before, double max_energy_current, double EnergyScale, std::vector<std::pair<double, double>>& spectrum) const
 	{
-		double interval = max_energy_current - min_energy_before;
+		const double interval = max_energy_current - min_energy_before;
 
 		ASSERT(interval >= 0);
 
 		//walk over old spectrums and adjust
 		for (auto it = spectrum.rbegin(); it != spectrum.rend(); ++it)
 		{
-			double omega = abs(it->first);
+			const double omega = abs(it->first);
 			if (omega >= max_energy_current) break;
 
-			double weight = ((abs(interval) < 1E-5 * EnergyScale) ? 0.5 : (omega - min_energy_before) / interval);
+			const double weight = ((abs(interval) < 1E-5 * EnergyScale) ? 0.5 : (omega - min_energy_before) / interval);
 
 			it->second *= weight;
 		}
@@ -69,9 +69,9 @@ namespace NRG {
 		if (evals.size() <= 1) return;
 		else if (iter % 2 == 1) return;
 
-		unsigned int nrvals = (unsigned int)matrix.cols();
+		const unsigned int nrvals = static_cast<unsigned int>(matrix.cols());
 
-		double ground = EnergyScale * evals(0);
+		const double ground = EnergyScale * evals(0);
 
 		double max_energy_current = EnergyScale * evals(nrvals - 1) - ground;
 
@@ -80,7 +80,7 @@ namespace NRG {
 		double min_energy_before = DBL_MAX;
 		if (positive_spectrum.size()) min_energy_before = positive_spectrum.back().first;
 
-		double interval = max_energy_current - min_energy_before;
+		const double interval = max_energy_current - min_energy_before;
 
 		std::thread thread1, thread2;
 
@@ -95,7 +95,7 @@ namespace NRG {
 			thread2.join();			
 		}
 
-		double weight;
+		double weight = 1;
 
 		// also adjust the new passed spectrum
 		for (unsigned int i = 0; i < nrvals; ++i)
@@ -131,20 +131,19 @@ namespace NRG {
 		double positive_limit = 10;
 		if (positive_spectrum.size()) positive_limit = round(positive_spectrum.front().first) + 1 + step / 2;
 
-		unsigned int nrnegative = (unsigned int)ceill(abs(negative_limit) / step);
-		unsigned int nrpositive = (unsigned int)ceill(positive_limit / step);
+		const unsigned int nrnegative = static_cast<unsigned int>(ceill(abs(negative_limit) / step));
+		const unsigned int nrpositive = static_cast<unsigned int>(ceill(positive_limit / step));
 
 		spectrum.reserve(nrnegative + nrpositive);
 
 		//double integral = 0;
-		double value, omega;
 
 		// spectral lines broadening
 
 		for (unsigned int pos = nrnegative; pos > 0; --pos)
 		{
-			omega = -step * pos;
-			value = Broaden(omega, negative_spectrum);
+			const double omega = -step * pos;
+			const double value = Broaden(omega, negative_spectrum);
 			spectrum.push_back(std::make_pair(omega, value));
 
 			//integral += step * value;			
@@ -152,8 +151,8 @@ namespace NRG {
 
 		for (unsigned int pos = 1; pos <= nrpositive; ++pos)
 		{
-			omega = step * pos;
-			value = Broaden(omega, positive_spectrum);
+			const double omega = step * pos;
+			const double value = Broaden(omega, positive_spectrum);
 			spectrum.push_back(std::make_pair(omega, value));
 
 			//integral += step * value;			
