@@ -22,7 +22,7 @@ namespace NRG {
 		for (auto &op : spectralOperators) delete op;
 	}
 
-	double NRGAlgorithm::GetCouplingForIteration(int iter)
+	double NRGAlgorithm::GetCouplingForIteration(int iter) const
 	{
 		return (1. - pow(Lambda, -iter - 1.)) / sqrt((1. - pow(Lambda, -2 * iter - 1))*(1. - pow(Lambda, -2 * iter - 3)));
 	}
@@ -62,8 +62,8 @@ namespace NRG {
 	{		
 		AddSite();
 
-		int enlargedMatrixSize = 4 * curMatrixSize;
-		int nextMatrixSize = min(enlargedMatrixSize, maxSize);
+		const int enlargedMatrixSize = 4 * curMatrixSize;
+		const int nextMatrixSize = min(enlargedMatrixSize, maxSize);
 
 		// diagonalize the hamiltonian
 		// the eigenvalues and eigenvectors are already sorted
@@ -71,8 +71,8 @@ namespace NRG {
 		// the diagonalization from eigen takes care of those
 		// the SelfAdjointEigenSolver does that, for another solver sorting might need be done afterwards
 		hamiltonian.Diagonalize();
-		Eigen::VectorXd evals = hamiltonian.eigenvalues();
-		Eigen::MatrixXd evecs = hamiltonian.eigenvectors();
+		const Eigen::VectorXd& evals = hamiltonian.eigenvalues();
+		const Eigen::MatrixXd& evecs = hamiltonian.eigenvectors();
 
 
 		// transform the hamiltonian and the operators to the new truncated basis
@@ -81,8 +81,8 @@ namespace NRG {
 		hamiltonian.matrix = hamiltonian.matrix.block(0, 0, nextMatrixSize, nextMatrixSize).eval();
 
 		// truncate the eigenbasis
-		Eigen::MatrixXd Ut = evecs.block(0, 0, enlargedMatrixSize, nextMatrixSize);
-		Eigen::MatrixXd U = Ut.adjoint();
+		const Eigen::MatrixXd Ut = evecs.block(0, 0, enlargedMatrixSize, nextMatrixSize);
+		const Eigen::MatrixXd U = Ut.adjoint();
 		
 		// the operators for the added site must be also in the new basis
 		FUpOperator currentfUpOperator(enlargedMatrixSize);
@@ -143,8 +143,8 @@ namespace NRG {
 				
 		hamiltonian.Diagonalize();
 
-		Eigen::MatrixXd Ut = hamiltonian.eigenvectors();
-		Eigen::MatrixXd U = Ut.adjoint();
+		const Eigen::MatrixXd& Ut = hamiltonian.eigenvectors();
+		const Eigen::MatrixXd U = Ut.adjoint();
 
 		// put the operators in the same basis as H
 		fUpOperator.matrix = U * fUpOperator.matrix * Ut;

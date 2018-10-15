@@ -22,9 +22,9 @@ namespace NRG {
 
 	void QDAnderson::Init()
 	{		
-		double B = theApp.options.B;
-		double U = theApp.options.U;
-		double eps = theApp.options.eps;
+		const double B = theApp.options.B;
+		const double U = theApp.options.U;
+		const double eps = theApp.options.eps;
 		double delta = theApp.options.delta;
 
 

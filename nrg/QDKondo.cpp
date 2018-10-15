@@ -21,8 +21,8 @@ namespace NRG {
 
 	void QDKondo::Init()
 	{
-		double B = theApp.options.B;
-		double J = theApp.options.J;
+		const double B = theApp.options.B;
+		const double J = theApp.options.J;
 		
 		hamiltonian.matrix = Eigen::MatrixXd::Zero(curMatrixSize, curMatrixSize);
 

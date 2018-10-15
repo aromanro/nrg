@@ -46,7 +46,7 @@ namespace NRG {
 		ResultsRetrieverInterface *passData;
 		ControllerInterface *controller;
 
-		double GetCouplingForIteration(int iter);
+		double GetCouplingForIteration(int iter) const;
 		void AdjustForEnergyScale();
 
 		void AddSite();
