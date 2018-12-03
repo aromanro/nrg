@@ -136,11 +136,16 @@ namespace NRG {
 
 		AdjustForEnergyScale();
 
+
+		// There is no need to start with a diagonalized Hamiltonian
+
+		
+		/*
 		// start with a diagonalized Hamiltonian 
 		// for the simple Anderson model in this program it already is in diagonal form
 		// but for Kondo it might not be, unless it's diagonalized in Init
 		// the same for the double quantum dot system
-				
+
 		hamiltonian.Diagonalize();
 
 		const Eigen::MatrixXd& Ut = hamiltonian.eigenvectors();
@@ -152,7 +157,8 @@ namespace NRG {
 
 		for (auto &op : staticOperators) op->matrix = U * op->matrix * Ut;
 		for (auto &op : spectralOperators) op->matrix = U * op->matrix * Ut;		
-		
+		*/
+
 		// the iteration over the Wilson chain
 		for (int iter = startIteration + 1; iter <= NrSteps; ++iter)
 		{

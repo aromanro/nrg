@@ -61,8 +61,8 @@ namespace NRG {
 		spectralOperators.push_back(sz);
 		*/
 		
-		SpectralOperator *down = new SpectralOperator(curMatrixSize); 
 
+		SpectralOperator *down = new SpectralOperator(curMatrixSize); 
 		// this is the Fup^t for the zero site
 		down->matrix = fDownOperator.matrix.adjoint();
 
