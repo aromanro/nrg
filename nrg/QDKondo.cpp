@@ -4,6 +4,7 @@
 #include "nrg.h"
 #include "Options.h"
 
+
 namespace NRG {
 
 	QDKondo::QDKondo(int nrsteps, int maxSize, double Lambda)
@@ -61,12 +62,11 @@ namespace NRG {
 		spectralOperators.push_back(sz);
 		*/
 		
-
 		SpectralOperator *down = new SpectralOperator(curMatrixSize); 
 		// this is the Fup^t for the zero site
 		down->matrix = fDownOperator.matrix.adjoint();
 
-		spectralOperators.push_back(down);		
+		spectralOperators.push_back(down);				
 	}
 
 }
