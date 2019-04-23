@@ -100,7 +100,7 @@ namespace NRG {
 		// also adjust the new passed spectrum
 		for (unsigned int i = 0; i < nrvals; ++i)
 		{
-			double omega = EnergyScale * evals(i) - ground;
+			const double omega = EnergyScale * evals(i) - ground;
 
 			//if (omega < 2. * EnergyScale) continue;
 
