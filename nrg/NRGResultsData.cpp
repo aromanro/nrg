@@ -21,15 +21,15 @@ void NRGResultsData::PassEigenvalues(int iter, const Eigen::VectorXd& evals, dou
 
 	std::lock_guard<std::mutex> lock(section);
 
-	data.push_back(std::make_pair(iter, std::vector<double>()));
+	data.emplace_back(std::make_pair(iter, std::vector<double>()));
 	data.back().second.reserve(evals.size());
 
-	double base = evals(0);
+	const double base = evals(0);
 
 	for (int i = 0; i < evals.size(); ++i)
 	{
-		double level = evals(i);
-		data.back().second.push_back(scale * (level - base));
+		const double level = evals(i);
+		data.back().second.emplace_back(scale * (level - base));
 	}
 }
 

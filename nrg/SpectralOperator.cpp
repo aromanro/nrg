@@ -109,10 +109,10 @@ namespace NRG {
 			else weight = (max_energy_current - omega) / interval;
 
 			double val = matrix(i, 0);
-			positive_spectrum.push_back(std::make_pair(omega, weight * val * val));
+			positive_spectrum.emplace_back(std::make_pair(omega, weight * val * val));
 
 			val = matrix(0, i);
-			negative_spectrum.push_back(std::make_pair(-omega, weight * val * val));
+			negative_spectrum.emplace_back(std::make_pair(-omega, weight * val * val));
 		}
 
 		thread1 = std::thread([this] { std::sort(negative_spectrum.begin(), negative_spectrum.end(), [](auto val1, auto val2) -> bool { return val1.first < val2.first; }); });
@@ -144,7 +144,7 @@ namespace NRG {
 		{
 			const double omega = -step * pos;
 			const double value = Broaden(omega, negative_spectrum);
-			spectrum.push_back(std::make_pair(omega, value));
+			spectrum.emplace_back(std::make_pair(omega, value));
 
 			//integral += step * value;			
 		}
@@ -153,7 +153,7 @@ namespace NRG {
 		{
 			const double omega = step * pos;
 			const double value = Broaden(omega, positive_spectrum);
-			spectrum.push_back(std::make_pair(omega, value));
+			spectrum.emplace_back(std::make_pair(omega, value));
 
 			//integral += step * value;			
 		}

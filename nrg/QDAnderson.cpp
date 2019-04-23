@@ -53,6 +53,6 @@ namespace NRG {
 		up->matrix += down.matrix;
 		*/
 
-		spectralOperators.push_back(up);
+		spectralOperators.emplace_back(up);
 	}
 }
