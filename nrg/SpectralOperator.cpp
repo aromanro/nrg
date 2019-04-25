@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "SpectralOperator.h"
 
-#include <thread>
+
+
 #include <list>
 
 #include "nrg.h"
@@ -82,17 +83,14 @@ namespace NRG {
 
 		const double interval = max_energy_current - min_energy_before;
 
-		std::thread thread1, thread2;
-
 		// if passed spectrum overlaps with the existing one
 		if (min_energy_before <= max_energy_current)
 		{
 			//walk over old spectrums and adjust
-			
-			thread1 = std::thread([&] { AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, positive_spectrum); });
-			thread2 = std::thread([&] { AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, negative_spectrum); });
-			thread1.join();
-			thread2.join();			
+			future1 = std::async(std::launch::async, [&] { AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, positive_spectrum); });
+			future2 = std::async(std::launch::async, [&] { AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, negative_spectrum); });
+			future1.get();
+			future2.get();			
 		}
 
 		double weight = 1;
@@ -115,10 +113,10 @@ namespace NRG {
 			negative_spectrum.emplace_back(std::make_pair(-omega, weight * val * val));
 		}
 
-		thread1 = std::thread([this] { std::sort(negative_spectrum.begin(), negative_spectrum.end(), [](auto val1, auto val2) -> bool { return val1.first < val2.first; }); });
-		thread2 = std::thread([this] { std::sort(positive_spectrum.begin(), positive_spectrum.end(), [](auto val1, auto val2) -> bool { return val1.first > val2.first; }); });
-		thread1.join();
-		thread2.join();
+		future1 = std::async(std::launch::async, [this] { std::sort(negative_spectrum.begin(), negative_spectrum.end(), [](const auto& val1, const auto& val2) -> bool { return val1.first < val2.first; }); });
+		future2 = std::async(std::launch::async, [this] { std::sort(positive_spectrum.begin(), positive_spectrum.end(), [](const auto& val1, const auto& val2) -> bool { return val1.first > val2.first; }); });
+		future1.get();
+		future2.get();
 	}
 
 	std::vector<std::pair<double, double>> SpectralOperator::GetSpectrum() const

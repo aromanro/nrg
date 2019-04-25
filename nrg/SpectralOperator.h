@@ -1,6 +1,8 @@
 #pragma once
 #include "Operator.h"
 
+#include <thread>
+#include <future>
 
 #include <vector>
 
@@ -13,6 +15,8 @@ namespace NRG {
 	protected:
 		std::vector<std::pair<double, double>> negative_spectrum;
 		std::vector<std::pair<double, double>> positive_spectrum;
+
+		std::future<void> future1, future2;
 
 		double b;
 		double step;
