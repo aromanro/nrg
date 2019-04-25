@@ -16,7 +16,7 @@ namespace NRG {
 		std::vector<std::pair<double, double>> negative_spectrum;
 		std::vector<std::pair<double, double>> positive_spectrum;
 
-		std::future<void> future1, future2;
+		std::future<void> future1;
 
 		double b;
 		double step;

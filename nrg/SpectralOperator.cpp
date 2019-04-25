@@ -88,9 +88,8 @@ namespace NRG {
 		{
 			//walk over old spectrums and adjust
 			future1 = std::async(std::launch::async, [&] { AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, positive_spectrum); });
-			future2 = std::async(std::launch::async, [&] { AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, negative_spectrum); });
+			AdjustSpectrum(min_energy_before, max_energy_current, EnergyScale, negative_spectrum);;
 			future1.get();
-			future2.get();			
 		}
 
 		double weight = 1;
@@ -114,9 +113,8 @@ namespace NRG {
 		}
 
 		future1 = std::async(std::launch::async, [this] { std::sort(negative_spectrum.begin(), negative_spectrum.end(), [](const auto& val1, const auto& val2) -> bool { return val1.first < val2.first; }); });
-		future2 = std::async(std::launch::async, [this] { std::sort(positive_spectrum.begin(), positive_spectrum.end(), [](const auto& val1, const auto& val2) -> bool { return val1.first > val2.first; }); });
+		std::sort(positive_spectrum.begin(), positive_spectrum.end(), [](const auto& val1, const auto& val2) -> bool { return val1.first > val2.first; });
 		future1.get();
-		future2.get();
 	}
 
 	std::vector<std::pair<double, double>> SpectralOperator::GetSpectrum() const
