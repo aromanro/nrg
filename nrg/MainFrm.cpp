@@ -349,17 +349,18 @@ void CMainFrame::OnSettingChange(UINT uFlags, LPCTSTR lpszSection)
 
 void CMainFrame::OnViewOptions()
 {
-	COptionsPropertySheet sheet(L"Options", this);
+	COptionsPropertySheet* sheet = new COptionsPropertySheet(L"Options", this);
 
 	CNRGPropertyPage page1;
 	CParametersPropertyPage page2;
 	CChartsPropertyPage page3;
 
-	sheet.AddPage(&page1);
-	sheet.AddPage(&page2);
-	sheet.AddPage(&page3);
+	sheet->AddPage(&page1);
+	sheet->AddPage(&page2);
+	sheet->AddPage(&page3);
 
-	sheet.DoModal();
+	sheet->DoModal();
+	delete sheet;
 }
 
 

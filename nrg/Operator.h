@@ -44,7 +44,7 @@ namespace NRG {
 
 				for (int i = 0; i < mat.rows(); ++i)
 					for (int j = 0; j < mat.cols(); ++j)
-						result.block(i * identitySize, j * identitySize, identitySize, identitySize) = mat(i, j) * Eigen::MatrixXd::Identity(identitySize, identitySize);
+						result.block(Eigen::Index(i) * identitySize, Eigen::Index(j) * identitySize, identitySize, identitySize) = mat(i, j) * Eigen::MatrixXd::Identity(identitySize, identitySize);
 
 				return result;
 			}

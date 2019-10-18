@@ -31,7 +31,7 @@ END_MESSAGE_MAP()
 // CnrgApp construction
 
 CnrgApp::CnrgApp()
-	: gdiplusToken(0)
+	: gdiplusToken(0), m_nAppLook(0)
 {
 	m_bHiColorIcons = TRUE;
 

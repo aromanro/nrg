@@ -28,15 +28,15 @@ namespace NRG {
 		if (changeSign)
 		{
 			newop.block(oldsize, oldsize, oldsize, oldsize) = -matrix;
-			newop.block(2 * oldsize, 2 * oldsize, oldsize, oldsize) = -matrix;
+			newop.block(2ULL * oldsize, 2ULL * oldsize, oldsize, oldsize) = -matrix;
 		}
 		else
 		{
 			newop.block(oldsize, oldsize, oldsize, oldsize) = matrix;
-			newop.block(2 * oldsize, 2 * oldsize, oldsize, oldsize) = matrix;
+			newop.block(2ULL * oldsize, 2ULL * oldsize, oldsize, oldsize) = matrix;
 		}
 
-		newop.block(3 * oldsize, 3 * oldsize, oldsize, oldsize)	= matrix;
+		newop.block(3ULL * oldsize, 3ULL * oldsize, oldsize, oldsize)	= matrix;
 
 		matrix.swap(newop);
 	}
@@ -55,7 +55,7 @@ namespace NRG {
 
 		const int subsize = dim / 4;
 		matrix.block(0, subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
-		matrix.block(2 * subsize, 3 * subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
+		matrix.block(2ULL * subsize, 3ULL * subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
 	}
 
 	//<0|down|down> = <0|0> = 1
@@ -67,8 +67,8 @@ namespace NRG {
 		ASSERT(dim % 4 == 0);
 
 		const int subsize = dim / 4;
-		matrix.block(0, 2 * subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
-		matrix.block(subsize, 3 * subsize, subsize, subsize) = -Eigen::MatrixXd::Identity(subsize, subsize);
+		matrix.block(0, 2ULL * subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
+		matrix.block(subsize, 3ULL * subsize, subsize, subsize) = -Eigen::MatrixXd::Identity(subsize, subsize);
 	}
 
 	

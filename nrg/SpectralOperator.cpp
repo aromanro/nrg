@@ -130,7 +130,7 @@ namespace NRG {
 		const unsigned int nrnegative = static_cast<unsigned int>(ceill(abs(negative_limit) / step));
 		const unsigned int nrpositive = static_cast<unsigned int>(ceill(positive_limit / step));
 
-		spectrum.reserve(nrnegative + nrpositive);
+		spectrum.reserve(static_cast<size_t>(nrnegative) + nrpositive);
 
 		//double integral = 0;
 

@@ -42,19 +42,19 @@ namespace NRG {
 
 		//first 'row'
 		hamiltonian.matrix.block(0, curMatrixSize, curMatrixSize, curMatrixSize) = fUpOperatorTmatrix;
-		hamiltonian.matrix.block(0, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatorTmatrix;
+		hamiltonian.matrix.block(0, 2ULL * curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatorTmatrix;
 
 		// second 'row'
 		hamiltonian.matrix.block(curMatrixSize, 0, curMatrixSize, curMatrixSize) = fUpOperatormatrix;
-		hamiltonian.matrix.block(curMatrixSize, 3 * curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatorTmatrix;
+		hamiltonian.matrix.block(curMatrixSize, 3ULL * curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatorTmatrix;
 
 		// third 'row'
-		hamiltonian.matrix.block(2 * curMatrixSize, 0, curMatrixSize, curMatrixSize) = fDownOperatormatrix;
-		hamiltonian.matrix.block(2 * curMatrixSize, 3 * curMatrixSize, curMatrixSize, curMatrixSize) = -fUpOperatorTmatrix;
+		hamiltonian.matrix.block(2ULL * curMatrixSize, 0, curMatrixSize, curMatrixSize) = fDownOperatormatrix;
+		hamiltonian.matrix.block(2ULL * curMatrixSize, 3ULL * curMatrixSize, curMatrixSize, curMatrixSize) = -fUpOperatorTmatrix;
 
 		// last 'row'
-		hamiltonian.matrix.block(3 * curMatrixSize, curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatormatrix;
-		hamiltonian.matrix.block(3 * curMatrixSize, 2 * curMatrixSize, curMatrixSize, curMatrixSize) = -fUpOperatormatrix;
+		hamiltonian.matrix.block(3ULL * curMatrixSize, curMatrixSize, curMatrixSize, curMatrixSize) = fDownOperatormatrix;
+		hamiltonian.matrix.block(3ULL * curMatrixSize, 2ULL * curMatrixSize, curMatrixSize, curMatrixSize) = -fUpOperatormatrix;
 	}
 
 	
