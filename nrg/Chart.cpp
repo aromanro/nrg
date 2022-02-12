@@ -65,28 +65,20 @@ bool Chart::Axis::ShouldDrawFirstTick() const
 
 void Chart::Axis::DrawTicks(Gdiplus::Graphics& g, Gdiplus::Point& start, int length)
 {
-	int nrticks = GetNumTicks();
-	double ticklen = static_cast<double>(length) / nrticks;
-
 	Gdiplus::Pen pen((Gdiplus::ARGB)Gdiplus::Color::Black);
 	pen.SetWidth(2);
 
+	DrawTicks(g, pen, start, GetNumTicks(), length, 6);
+	DrawTicks(g, pen, start, GetNumBigTicks(), length, 9);
+}
+
+void Chart::Axis::DrawTicks(Gdiplus::Graphics& g, Gdiplus::Pen& pen, Gdiplus::Point& start, int nrticks, int length, int offset)
+{
+	double ticklen = static_cast<double>(length) / nrticks;
+
 	Gdiplus::Point pt(start);
 	Gdiplus::Point pte(start);
-	pte.Y += 6;
-	for (int i = (ShouldDrawFirstTick() ? 0 : 1); i <= nrticks; ++i)
-	{
-		pt.X = static_cast<int>(start.X + i * ticklen);
-		pte.X = pt.X;
-		g.DrawLine(&pen, pt, pte);
-	}
-
-	nrticks = GetNumBigTicks();
-	ticklen = static_cast<double>(length) / nrticks;
-
-	pt = start;
-	pte = start;
-	pte.Y += 9;
+	pte.Y += offset;
 	for (int i = (ShouldDrawFirstTick() ? 0 : 1); i <= nrticks; ++i)
 	{
 		pt.X = static_cast<int>(start.X + i * ticklen);
@@ -94,6 +86,7 @@ void Chart::Axis::DrawTicks(Gdiplus::Graphics& g, Gdiplus::Point& start, int len
 		g.DrawLine(&pen, pt, pte);
 	}
 }
+
 
 std::list<CString> Chart::Axis::GetLabels() const
 {

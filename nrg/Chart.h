@@ -20,6 +20,7 @@ protected:
 		bool ShouldDrawFirstTick() const;
 
 		void DrawTicks(Gdiplus::Graphics& g, Gdiplus::Point& start, int length);
+		void DrawTicks(Gdiplus::Graphics& g, Gdiplus::Pen &pen, Gdiplus::Point& start, int nrticks, int length, int offset);
 		void DrawGrid(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, int length2);
 		void DrawLabels(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, float fontSize = 0);
 		void DrawTip(Gdiplus::Graphics& g, const Gdiplus::Point& end);
