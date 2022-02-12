@@ -18,15 +18,7 @@ void Chart::Axis::Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, 
 
 	end.X += 4;
 
-	Gdiplus::Point end2(end.X - 15, end.Y - 6);
-	Gdiplus::Point end3(end.X - 15, end.Y + 6);
-
-	const Gdiplus::Point points[] = { end, end2, end3 };
-	
-	Gdiplus::SolidBrush *brush = new Gdiplus::SolidBrush((Gdiplus::ARGB)Gdiplus::Color::Black);
-	g.FillPolygon(brush, points, 3);
-	delete brush;
-
+	DrawTip(g, end);
 	DrawTicks(g, start, length);	
 
 	if ((isX && parent->XAxisGrid) || (!isX && parent->YAxisGrid))
@@ -34,6 +26,19 @@ void Chart::Axis::Draw(Gdiplus::Graphics& g, Gdiplus::Point& start, int length, 
 
 	DrawLabels(g, start, length, fontSize);
 }
+
+void Chart::Axis::DrawTip(Gdiplus::Graphics& g, const Gdiplus::Point& end)
+{
+	Gdiplus::Point end2(end.X - 15, end.Y - 6);
+	Gdiplus::Point end3(end.X - 15, end.Y + 6);
+
+	const Gdiplus::Point points[] = { end, end2, end3 };
+
+	Gdiplus::SolidBrush* brush = new Gdiplus::SolidBrush((Gdiplus::ARGB)Gdiplus::Color::Black);
+	g.FillPolygon(brush, points, 3);
+	delete brush;
+}
+
 
 int Chart::Axis::GetNumTicks() const
 {
