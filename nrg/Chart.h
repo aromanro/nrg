@@ -128,5 +128,12 @@ public:
 	int maxTitleHeight;
 	int maxAxisLabelHeight;
 	int maxLabelHeight;
+
+protected:
+	void DrawXLabel(Gdiplus::Graphics& g, const CRect& rect);
+	void DrawYLabel(Gdiplus::Graphics& g, const CRect& rect, int leftSide);
+	void DrawData(Gdiplus::Graphics& g, const CRect& rect);
+	void DrawAxis(Gdiplus::Graphics& g, CRect& rect, int titleHeight);
+	float GetLabelFontSize(Gdiplus::Graphics& g);
 };
 

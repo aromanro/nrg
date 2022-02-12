@@ -469,7 +469,6 @@ void Chart::Draw(const CDC* pDC, CRect& rect)
 
 	if (antialias) g.SetSmoothingMode(Gdiplus::SmoothingMode::SmoothingModeAntiAlias);
 
-
 	Gdiplus::SolidBrush brush((Gdiplus::ARGB)Gdiplus::Color::White);
 	g.FillRectangle(&brush, rect.left, rect.top, rect.Width(), rect.Height());
 
@@ -478,6 +477,17 @@ void Chart::Draw(const CDC* pDC, CRect& rect)
 
 	DrawText(title, g, boundRect);
 
+	DrawAxis(g, rect, titleHeight);
+
+	DrawData(g, rect);
+
+	// now draw the buffer on the screen
+	Gdiplus::Graphics gdi(pDC->GetSafeHdc());
+	gdi.DrawImage(&buffer, posX, posY);
+}
+
+void Chart::DrawAxis(Gdiplus::Graphics& g, CRect& rect, int titleHeight)
+{
 	// make room for title and labels
 	int leftSide = min(max(rect.Width() / 20, 70), 100);
 	int top = max(titleHeight * 2, rect.Height() / 10);
@@ -485,58 +495,70 @@ void Chart::Draw(const CDC* pDC, CRect& rect)
 
 	chartRect = rect;
 
-	// try to find out the labels font size
-	Gdiplus::RectF labelBound(0,0,GetLabelWidth(true),GetLabelHeight(true));
-
-	float fontSize = static_cast<float>(maxLabelHeight);
-	std::list<CString> labels = X.GetLabels();
-	for (auto label : labels)
-		fontSize = min(fontSize, static_cast<float>(GetNeededFontSize(label, g, labelBound)));
-	
-	labelBound.Width = GetLabelWidth(false);
-	labelBound.Height = GetLabelHeight(false);
-	labels = Y.GetLabels();
-	for (auto label : labels)
-		fontSize = min(fontSize, static_cast<float>(GetNeededFontSize(label, g, labelBound)));
-
+	float fontSize = GetLabelFontSize(g);
 
 	// draw horizontal axis
 	g.TranslateTransform(static_cast<float>(rect.left), static_cast<float>(rect.bottom));
 	Gdiplus::Point zero(0, 0);
 	X.Draw(g, zero, rect.Width(), rect.Height(), fontSize);
 
-	g.ScaleTransform(1,-1);
+	// vertical
+	g.ScaleTransform(1, -1);
 	g.RotateTransform(90.);
-
 	Y.Draw(g, zero, rect.Height(), rect.Width(), fontSize);
 
 	g.ResetTransform();
 
-	// draw X label
-	if (XAxisLabel.GetLength())
-	{
-		Gdiplus::RectF localLabelBound(static_cast<float>(rect.left), static_cast<float>(rect.top + rect.Height() + rect.Height() / 12.), static_cast<float>(rect.Width()), min(static_cast<float>(min(rect.Width(),rect.Height()) / 12.), maxAxisLabelHeight));
-		DrawText(XAxisLabel, g, localLabelBound);
-	}
-
-	// draw Y label
-	if (YAxisLabel.GetLength())
-	{
-		g.TranslateTransform(static_cast<float>(rect.left), static_cast<float>(rect.bottom));
-		g.RotateTransform(-90.);
-		Gdiplus::RectF localLabelBound(static_cast<float>(rect.Height() / 10.), -static_cast<float>(leftSide) , static_cast<float>(rect.Height()), min(static_cast<float>(min(rect.Width(), rect.Height()) / 12.), maxAxisLabelHeight));
-		DrawText(YAxisLabel, g, localLabelBound);
-	}
+	DrawXLabel(g, rect);
+	DrawYLabel(g, rect, leftSide);
 
 	g.ResetTransform();
 	g.TranslateTransform(static_cast<float>(rect.left), static_cast<float>(rect.bottom));
 	g.ScaleTransform(1, -1);
+}
 
-	boundRect.X = 0;
-	boundRect.Y = 0;
-	boundRect.Width = static_cast<float>(rect.Width());
-	boundRect.Height = static_cast<float>(rect.Height());
 
+float Chart::GetLabelFontSize(Gdiplus::Graphics& g)
+{
+	// try to find out the labels font size
+	Gdiplus::RectF labelBound(0, 0, GetLabelWidth(true), GetLabelHeight(true));
+
+	float fontSize = static_cast<float>(maxLabelHeight);
+	std::list<CString> labels = X.GetLabels();
+	for (auto label : labels)
+		fontSize = min(fontSize, static_cast<float>(GetNeededFontSize(label, g, labelBound)));
+
+	labelBound.Width = GetLabelWidth(false);
+	labelBound.Height = GetLabelHeight(false);
+	labels = Y.GetLabels();
+	for (auto label : labels)
+		fontSize = min(fontSize, static_cast<float>(GetNeededFontSize(label, g, labelBound)));
+}
+
+
+void Chart::DrawXLabel(Gdiplus::Graphics& g, const CRect& rect)
+{
+	if (XAxisLabel.GetLength())
+	{
+		Gdiplus::RectF localLabelBound(static_cast<float>(rect.left), static_cast<float>(rect.top + rect.Height() + rect.Height() / 12.), static_cast<float>(rect.Width()), min(static_cast<float>(min(rect.Width(), rect.Height()) / 12.), maxAxisLabelHeight));
+		DrawText(XAxisLabel, g, localLabelBound);
+	}
+}
+
+void Chart::DrawYLabel(Gdiplus::Graphics& g, const CRect& rect, int leftSide)
+{
+	if (YAxisLabel.GetLength())
+	{
+		g.TranslateTransform(static_cast<float>(rect.left), static_cast<float>(rect.bottom));
+		g.RotateTransform(-90.);
+		Gdiplus::RectF localLabelBound(static_cast<float>(rect.Height() / 10.), -static_cast<float>(leftSide), static_cast<float>(rect.Height()), min(static_cast<float>(min(rect.Width(), rect.Height()) / 12.), maxAxisLabelHeight));
+		DrawText(YAxisLabel, g, localLabelBound);
+	}
+}
+
+void Chart::DrawData(Gdiplus::Graphics& g, const CRect& rect)
+{
+	Gdiplus::RectF boundRect(0, 0, static_cast<float>(rect.Width()), static_cast<float>(rect.Height()));
 	Gdiplus::RectF dataRect;
 
 	dataRect.X = static_cast<float>((XAxisMin == DBL_MIN) ? dataSets.getXMin() : XAxisMin);
@@ -545,14 +567,11 @@ void Chart::Draw(const CDC* pDC, CRect& rect)
 	dataRect.Width = static_cast<float>(((XAxisMax == DBL_MAX) ? dataSets.getXMax() : XAxisMax) - dataRect.X);
 	dataRect.Height = static_cast<float>(((YAxisMax == DBL_MAX) ? dataSets.getYMax() : YAxisMax) - dataRect.Y);
 
-	if (dataRect.Width > 0 && dataRect.Height > 0) 
+	if (dataRect.Width > 0 && dataRect.Height > 0)
 		dataSets.Draw(g, boundRect, dataRect, useSpline);
-
-	// now draw the buffer on the screen
-	Gdiplus::Graphics gdi(pDC->GetSafeHdc());
-	gdi.DrawImage(&buffer, posX, posY);
-
 }
+
+
 
 void Chart::AddDataSet(const double *dataX, const double *dataY, unsigned int len, float lineWidth, COLORREF color)
 {
