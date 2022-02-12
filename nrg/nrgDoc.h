@@ -28,7 +28,6 @@ public:
 
 // Operations
 public:
-
 	Chart m_RenormalizationFlowChart;
 	Chart m_SpectralFunctionChart;
 
@@ -50,9 +49,7 @@ public:
 #endif
 
 protected:
-
 // Generated message map functions
-protected:
 	DECLARE_MESSAGE_MAP()
 
 #ifdef SHARED_HANDLERS

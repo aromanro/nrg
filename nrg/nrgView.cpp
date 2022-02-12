@@ -40,7 +40,6 @@ CnrgView::CnrgView()
 	: timer(NULL)
 {
 	// TODO: add construction code here
-
 }
 
 CnrgView::~CnrgView()
@@ -146,8 +145,7 @@ CnrgDoc* CnrgView::GetDocument() const // non-debug version is inline
 
 void CnrgView::OnInitialUpdate()
 {
-	CView::OnInitialUpdate();
-	
+	CView::OnInitialUpdate();	
 }
 
 

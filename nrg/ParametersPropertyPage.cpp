@@ -48,9 +48,6 @@ void CParametersPropertyPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT5, B);
 	DDX_Text(pDX, IDC_EDIT6, b);
 	DDX_Text(pDX, IDC_EDIT7, step);
-
-
-
 }
 
 
