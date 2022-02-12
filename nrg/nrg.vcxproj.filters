@@ -96,6 +96,12 @@
     <ClInclude Include="NRGController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChartAxis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataSets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nrg.cpp">
@@ -168,6 +174,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NRGController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ChartAxis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataSets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

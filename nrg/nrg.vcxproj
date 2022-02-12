@@ -206,8 +206,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Chart.h" />
+    <ClInclude Include="ChartAxis.h" />
     <ClInclude Include="ChartsPropertyPage.h" />
     <ClInclude Include="ComputationThread.h" />
+    <ClInclude Include="DataSets.h" />
     <ClInclude Include="DUpOperator.h" />
     <ClInclude Include="Hamiltonian.h" />
     <ClInclude Include="MainFrm.h" />
@@ -234,8 +236,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chart.cpp" />
+    <ClCompile Include="ChartAxis.cpp" />
     <ClCompile Include="ChartsPropertyPage.cpp" />
     <ClCompile Include="ComputationThread.cpp" />
+    <ClCompile Include="DataSets.cpp" />
     <ClCompile Include="DUpOperator.cpp" />
     <ClCompile Include="Hamiltonian.cpp" />
     <ClCompile Include="MainFrm.cpp" />
