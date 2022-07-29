@@ -1,6 +1,7 @@
 # nrg
 A simple program implementing the numerical renormalization group
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8174687fed904d01be61d9ecc1051b8e)](https://app.codacy.com/gh/aromanro/nrg?utm_source=github.com&utm_medium=referral&utm_content=aromanro/nrg&utm_campaign=Badge_Grade_Settings)
 [![CodeFactor](https://www.codefactor.io/repository/github/aromanro/nrg/badge)](https://www.codefactor.io/repository/github/aromanro/nrg)
 
 A more detailed description of the project is on the computational physics blog: https://compphys.go.ro/the-numerical-renormalization-group/
