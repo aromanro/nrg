@@ -12,7 +12,7 @@ namespace NRG {
 		passData(NULL), controller(NULL), startIteration(0)
 	{
 		SqrtLambda = sqrt(Lambda);
-		Rescale = (1. + 1. / Lambda) / 2.;
+		Rescale = 0.5 * (1. + 1. / Lambda);
 	}
 
 
@@ -116,6 +116,7 @@ namespace NRG {
 
 	void NRGAlgorithm::AdjustForEnergyScale()
 	{
+		const double InvRescale = 1. / Rescale;
 		if (startIteration == -1)
 		{
 			// adjust for the energy scale of the -1 iteration
@@ -124,10 +125,10 @@ namespace NRG {
 			t /= SqrtLambda;
 
 			// the Rescale factor was taken out
-			t /= Rescale;
+			t *= InvRescale;
 		}
 
-		hamiltonian.matrix /= Rescale;
+		hamiltonian.matrix *= InvRescale;
 	}
 
 	void NRGAlgorithm::Calculate()

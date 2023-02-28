@@ -33,7 +33,7 @@ namespace NRG {
 		
 		const double lndif = log(abs(omega)) - log(abs(omegaN));
 
-		return exp(-b2 / 4.) / (b * abs(omega) * sqrt(M_PI)) * exp(-lndif * lndif / b2);
+		return exp(-b2 * 0.25) / (b * abs(omega) * sqrt(M_PI)) * exp(-lndif * lndif / b2);
 	}
 
 
