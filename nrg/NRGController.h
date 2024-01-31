@@ -8,10 +8,10 @@ class NRGController :
 {
 public:
 	NRGController();
-	virtual ~NRGController();
+	~NRGController() override;
 
 	std::atomic_bool endIt;
 
-	virtual bool ShouldCancel();
+	bool ShouldCancel() override;
 };
 

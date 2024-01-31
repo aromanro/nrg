@@ -19,33 +19,33 @@ protected: // create from serialization only
 	CnrgDoc();
 	DECLARE_DYNCREATE(CnrgDoc)
 
-// Attributes
 public:
+	bool Tick();
+	void StartComputation();
+	void SetupCharts();
+	void CancelThread();
+	CnrgView* GetView();
+
 	NRGResultsData computationData;
 	NRGController controller;
 
 	std::thread m_thread;
 
-// Operations
-public:
 	Chart m_RenormalizationFlowChart;
 	Chart m_SpectralFunctionChart;
 
-// Overrides
-public:
-	virtual BOOL OnNewDocument();
-	virtual void Serialize(CArchive& ar);
+	BOOL OnNewDocument() override;
+	void Serialize(CArchive& ar) override;
 #ifdef SHARED_HANDLERS
-	virtual void InitializeSearchContent();
-	virtual void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds);
+	void InitializeSearchContent() override;
+	void OnDrawThumbnail(CDC& dc, LPRECT lprcBounds) override;
 #endif // SHARED_HANDLERS
 
 // Implementation
-public:
-	virtual ~CnrgDoc();
+	~CnrgDoc() override;
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+	void AssertValid() const override;
+	void Dump(CDumpContext& dc) const override;
 #endif
 
 protected:
@@ -56,10 +56,4 @@ protected:
 	// Helper function that sets search content for a Search Handler
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
-public:
-	bool Tick();
-	void StartComputation();
-	void SetupCharts();
-	void CancelThread();
-	CnrgView* GetView();
 };

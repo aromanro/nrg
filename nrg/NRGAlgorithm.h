@@ -12,14 +12,14 @@ namespace NRG {
 
 	class ResultsRetrieverInterface {
 	public:
-		virtual ~ResultsRetrieverInterface() {}
+		virtual ~ResultsRetrieverInterface() = default;
 		virtual void PassEigenvalues(int iter, const Eigen::VectorXd& evals, double scale) = 0;
 		virtual void Finished(NRGAlgorithm* algo) = 0;
 	};
 
 	class ControllerInterface {
 	public:
-		virtual ~ControllerInterface() {}
+		virtual ~ControllerInterface() = default;
 		virtual bool ShouldCancel() = 0;
 	};
 

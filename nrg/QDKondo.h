@@ -9,9 +9,9 @@ namespace NRG {
 	{
 	public:
 		QDKondo(int nrsteps = 50, int maxSize = 200, double Lambda = 2.);
-		virtual ~QDKondo();
+		~QDKondo() override;
 
-		virtual void Init();
+		void Init() override;
 	};
 
 }

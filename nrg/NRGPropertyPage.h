@@ -10,7 +10,7 @@ class CNRGPropertyPage : public CMFCPropertyPage
 
 public:
 	CNRGPropertyPage();
-	virtual ~CNRGPropertyPage();
+	~CNRGPropertyPage() override;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME

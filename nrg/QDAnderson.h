@@ -8,9 +8,9 @@ namespace NRG {
 	{
 	public:
 		QDAnderson(int nrsteps = 50, int maxSize = 200, double Lambda = 2.);
-		virtual ~QDAnderson();
+		~QDAnderson() override;
 
-		virtual void Init();
+		void Init() override;
 	};
 
 

@@ -23,10 +23,10 @@ public:
 	Chart* spectralChart;
 
 	NRGResultsData();
-	virtual ~NRGResultsData();
+	~NRGResultsData() override;
 
-	virtual void PassEigenvalues(int iter, const Eigen::VectorXd& evals, double scale);	
-	virtual void Finished(NRG::NRGAlgorithm *nrg);
+	void PassEigenvalues(int iter, const Eigen::VectorXd& evals, double scale) override;	
+	void Finished(NRG::NRGAlgorithm *nrg) override;
 
 	bool TransferToChart(Chart& chart);
 

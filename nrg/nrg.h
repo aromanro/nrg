@@ -25,10 +25,13 @@ class CnrgApp : public CWinAppEx
 public:
 	CnrgApp();
 
-
 // Overrides
-public:
-	virtual BOOL InitInstance();
+	BOOL InitInstance() override;
+	void PreLoadState() override;
+	void LoadCustomState() override;
+	void SaveCustomState() override;
+
+	int ExitInstance() override;
 
 // Implementation
 
@@ -41,13 +44,8 @@ public:
 
 	Options options;
 
-	virtual void PreLoadState();
-	virtual void LoadCustomState();
-	virtual void SaveCustomState();
-
 	afx_msg void OnAppAbout();
 	DECLARE_MESSAGE_MAP()
-	virtual int ExitInstance();
 };
 
 extern CnrgApp theApp;

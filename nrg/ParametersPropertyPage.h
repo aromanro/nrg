@@ -7,26 +7,24 @@
 class CParametersPropertyPage : public CMFCPropertyPage
 {
 	DECLARE_DYNAMIC(CParametersPropertyPage)
+	DECLARE_MESSAGE_MAP()
 
 public:
 	CParametersPropertyPage();
-	virtual ~CParametersPropertyPage();
+	~CParametersPropertyPage() override;
+
+	BOOL OnApply() override;
+	BOOL OnInitDialog() override;
+	void ApplyValues();
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_PARAMETERSPROPERTYPAGE };
 #endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+private:
+	void DoDataExchange(CDataExchange* pDX) override;    // DDX/DDV support
 
-	DECLARE_MESSAGE_MAP()
-public:
-	virtual BOOL OnApply();
-	virtual BOOL OnInitDialog();
-	void ApplyValues();
-
-protected:
 	CNumberEdit m_UEdit;
 
 	CNumberEdit m_epsEdit;

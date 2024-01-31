@@ -16,15 +16,14 @@ protected: // create from serialization only
 public:
 // Operations
 // Overrides
-	virtual BOOL PreCreateWindow(CREATESTRUCT& cs);
-	virtual BOOL LoadFrame(UINT nIDResource, DWORD dwDefaultStyle = WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, CWnd* pParentWnd = NULL, CCreateContext* pContext = NULL);
+	BOOL PreCreateWindow(CREATESTRUCT& cs) override;
+	BOOL LoadFrame(UINT nIDResource, DWORD dwDefaultStyle = WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, CWnd* pParentWnd = NULL, CCreateContext* pContext = NULL) override;
 
 // Implementation
-public:
-	virtual ~CMainFrame();
+	~CMainFrame() override;
 #ifdef _DEBUG
-	virtual void AssertValid() const;
-	virtual void Dump(CDumpContext& dc) const;
+	void AssertValid() const override;
+	void Dump(CDumpContext& dc) const override;
 #endif
 
 protected:  // control bar embedded members
@@ -34,7 +33,6 @@ protected:  // control bar embedded members
 	CMFCToolBarImages m_UserImages;
 
 // Generated message map functions
-protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnViewCustomize();
 	afx_msg LRESULT OnToolbarCreateNew(WPARAM wp, LPARAM lp);
@@ -45,7 +43,7 @@ protected:
 
 	BOOL CreateDockingWindows();
 	void SetDockingWindowIcons(BOOL bHiColorIcons);
-public:
+
 	afx_msg void OnViewOptions();
 	afx_msg void OnCalculateStart();
 	afx_msg void OnCalculateStop();

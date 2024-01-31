@@ -9,9 +9,9 @@ class NRGComputationThread :
 protected:
 	NRG::NRGAlgorithm* nrg;
 
-	virtual void Calculate();
+	void Calculate() override;
 public:
 	NRGComputationThread(NRG::NRGAlgorithm *algo = NULL);
-	~NRGComputationThread();
+	~NRGComputationThread() override;
 };
 
