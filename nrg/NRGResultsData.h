@@ -12,18 +12,15 @@
 class NRGResultsData :
 	public NRG::ResultsRetrieverInterface
 {
-protected:
+private:
 	std::mutex section;
 
-	std::atomic_bool finished;
+	std::atomic_bool finished{ true };
 
 	std::list<std::pair<double, std::vector<double>>> data;
 
 public:
-	Chart* spectralChart;
-
-	NRGResultsData();
-	~NRGResultsData() override;
+	Chart* spectralChart = nullptr;
 
 	void PassEigenvalues(int iter, const Eigen::VectorXd& evals, double scale) override;	
 	void Finished(NRG::NRGAlgorithm *nrg) override;

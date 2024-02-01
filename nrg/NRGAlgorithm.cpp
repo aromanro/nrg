@@ -9,7 +9,7 @@ namespace NRG {
 	NRGAlgorithm::NRGAlgorithm(int nrsteps, int maxsize, double lambda, int startHamiltonianSize)
 		: NrSteps(nrsteps), Lambda(lambda), t(0), maxSize(maxsize), curMatrixSize(startHamiltonianSize),
 		fUpOperator(startHamiltonianSize), fDownOperator(startHamiltonianSize),
-		passData(NULL), controller(NULL), startIteration(0)
+		passData(nullptr), controller(nullptr), startIteration(0)
 	{
 		SqrtLambda = sqrt(Lambda);
 		Rescale = 0.5 * (1. + 1. / Lambda);

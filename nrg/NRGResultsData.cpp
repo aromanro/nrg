@@ -4,17 +4,6 @@
 #include "SpectralOperator.h"
 
 
-NRGResultsData::NRGResultsData()
-	: spectralChart(NULL), finished(true)
-{
-}
-
-
-NRGResultsData::~NRGResultsData()
-{
-}
-
-
 void NRGResultsData::PassEigenvalues(int iter, const Eigen::VectorXd& evals, double scale)
 {
 	if (iter % 2 == 0) return;

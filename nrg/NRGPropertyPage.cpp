@@ -21,10 +21,6 @@ CNRGPropertyPage::CNRGPropertyPage()
 	model = theApp.options.model;
 }
 
-CNRGPropertyPage::~CNRGPropertyPage()
-{
-}
-
 void CNRGPropertyPage::DoDataExchange(CDataExchange* pDX)
 {
 	CMFCPropertyPage::DoDataExchange(pDX);

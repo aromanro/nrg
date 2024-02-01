@@ -11,7 +11,6 @@ class CParametersPropertyPage : public CMFCPropertyPage
 
 public:
 	CParametersPropertyPage();
-	~CParametersPropertyPage() override;
 
 	BOOL OnApply() override;
 	BOOL OnInitDialog() override;

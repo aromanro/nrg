@@ -15,11 +15,6 @@ namespace NRG {
 		t = GetCouplingForIteration(0);
 	}
 
-
-	QDKondo::~QDKondo()
-	{
-	}
-
 	void QDKondo::Init()
 	{
 		const double B = theApp.options.B;

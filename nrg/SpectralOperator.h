@@ -14,7 +14,6 @@ namespace NRG {
 	{
 	public:
 		SpectralOperator(int size = 4, bool extendChangeSign = true);
-		~SpectralOperator() override;
 
 		void PassSpectral(int iter, double EnergyScale, const Eigen::VectorXd& evals);
 

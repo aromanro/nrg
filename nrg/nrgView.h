@@ -8,12 +8,11 @@
 class CnrgView : public CView
 {
 protected: // create from serialization only
-	CnrgView();
+	CnrgView() = default;
 	DECLARE_DYNCREATE(CnrgView)
 	DECLARE_MESSAGE_MAP()
 
 public:
-	~CnrgView() override;
 
 	CnrgDoc* GetDocument() const;
 
@@ -27,8 +26,8 @@ public:
 	void Dump(CDumpContext& dc) const override;
 #endif
 
-protected:
-	UINT_PTR timer;
+private:
+	UINT_PTR timer = 0;
 
 	BOOL OnPreparePrinting(CPrintInfo* pInfo) override;
 	void OnBeginPrinting(CDC* pDC, CPrintInfo* pInfo) override;
@@ -42,7 +41,7 @@ protected:
 	afx_msg void OnDestroy();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
-	void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = NULL) override;
+	void OnPrepareDC(CDC* pDC, CPrintInfo* pInfo = nullptr) override;
 	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
 	afx_msg BOOL OnEraseBkgnd(CDC* pDC);
 };

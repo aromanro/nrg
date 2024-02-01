@@ -10,11 +10,6 @@ namespace NRG {
 	}
 
 
-	Operator::~Operator()
-	{
-	}
-
-
 	void Operator::Extend()
 	{
 		Eigen::MatrixXd newop;

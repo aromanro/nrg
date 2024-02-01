@@ -7,10 +7,7 @@ class NRGController :
 	public NRG::ControllerInterface
 {
 public:
-	NRGController();
-	~NRGController() override;
-
-	std::atomic_bool endIt;
+	std::atomic_bool endIt{ false };
 
 	bool ShouldCancel() override;
 };

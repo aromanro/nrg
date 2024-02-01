@@ -133,9 +133,9 @@ void CnrgDoc::SetSearchContent(const CString& value)
 	}
 	else
 	{
-		CMFCFilterChunkValueImpl *pChunk = NULL;
+		CMFCFilterChunkValueImpl *pChunk = nullptr;
 		ATLTRY(pChunk = new CMFCFilterChunkValueImpl);
-		if (pChunk != NULL)
+		if (pChunk != nullptr)
 		{
 			pChunk->SetTextValue(PKEY_Search_Contents, value, CHUNK_TEXT);
 			SetChunkValue(pChunk);
@@ -268,5 +268,5 @@ CnrgView* CnrgDoc::GetView()
 			return dynamic_cast<CnrgView*>(pView);
 	}
 
-	return NULL;
+	return nullptr;
 }

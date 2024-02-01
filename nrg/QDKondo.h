@@ -9,7 +9,6 @@ namespace NRG {
 	{
 	public:
 		QDKondo(int nrsteps = 50, int maxSize = 200, double Lambda = 2.);
-		~QDKondo() override;
 
 		void Init() override;
 	};

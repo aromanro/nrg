@@ -16,10 +16,6 @@ namespace NRG {
 	}
 
 
-	QDAnderson::~QDAnderson()
-	{
-	}
-
 	void QDAnderson::Init()
 	{		
 		const double B = theApp.options.B;

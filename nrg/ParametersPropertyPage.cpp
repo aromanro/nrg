@@ -24,10 +24,6 @@ CParametersPropertyPage::CParametersPropertyPage()
 	step = theApp.options.step;
 }
 
-CParametersPropertyPage::~CParametersPropertyPage()
-{
-}
-
 void CParametersPropertyPage::DoDataExchange(CDataExchange* pDX)
 {
 	CMFCPropertyPage::DoDataExchange(pDX);

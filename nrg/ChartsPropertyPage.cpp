@@ -28,10 +28,6 @@ CChartsPropertyPage::CChartsPropertyPage()
 	XSmallTicksSpectral = theApp.options.XSmallTicksSpectral;
 }
 
-CChartsPropertyPage::~CChartsPropertyPage()
-{
-}
-
 void CChartsPropertyPage::DoDataExchange(CDataExchange* pDX)
 {
 	CMFCPropertyPage::DoDataExchange(pDX);

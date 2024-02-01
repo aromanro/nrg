@@ -22,11 +22,6 @@ namespace NRG {
 		b2 = b*b;
 	}
 
-
-	SpectralOperator::~SpectralOperator()
-	{
-	}
-
 	double SpectralOperator::LogGauss(double omega, double omegaN) const
 	{
 		ASSERT((omega < 0 && omegaN < 0) || (omega > 0 && omegaN > 0));

@@ -15,11 +15,6 @@ namespace NRG {
 		startIteration = -1;
 	}
 
-
-	TwoQDRKKY::~TwoQDRKKY()
-	{
-	}
-
 	void TwoQDRKKY::Init()
 	{
 		double B = theApp.options.B;

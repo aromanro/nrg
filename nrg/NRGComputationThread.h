@@ -11,7 +11,7 @@ protected:
 
 	void Calculate() override;
 public:
-	NRGComputationThread(NRG::NRGAlgorithm *algo = NULL);
+	NRGComputationThread(NRG::NRGAlgorithm *algo = nullptr);
 	~NRGComputationThread() override;
 };
 

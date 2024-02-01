@@ -21,43 +21,43 @@ namespace NRG {
 		// extendChangeSign should be true for fermionic operators
 		// false for bosonic operators
 		Operator(unsigned int size = 4, bool extendChangeSign = true);
-		virtual ~Operator();
+		virtual ~Operator() = default;
 
 		Eigen::MatrixXd matrix;
 		void Extend();
 
 		inline static Eigen::MatrixXd KroneckerProduct(const Eigen::MatrixXd& mat1, const Eigen::MatrixXd& mat2)
-			{
-				Eigen::MatrixXd result(mat1.rows() * mat2.rows(), mat1.cols() * mat2.cols());
+		{
+			Eigen::MatrixXd result(mat1.rows() * mat2.rows(), mat1.cols() * mat2.cols());
 
-				for (int i = 0; i < mat1.rows(); ++i)
-					for (int j = 0; j < mat1.cols(); ++j)
-						result.block(i * mat2.rows(), j * mat2.cols(), mat2.rows(), mat2.cols()) = mat1(i, j) * mat2;
+			for (int i = 0; i < mat1.rows(); ++i)
+				for (int j = 0; j < mat1.cols(); ++j)
+					result.block(i * mat2.rows(), j * mat2.cols(), mat2.rows(), mat2.cols()) = mat1(i, j) * mat2;
 
-				return result;
-			}
+			return result;
+		}
 
 
-			inline static Eigen::MatrixXd KroneckerProductWithIdentity(const Eigen::MatrixXd& mat, int identitySize)
-			{
-				Eigen::MatrixXd result(mat.rows() * identitySize, mat.cols() * identitySize);
+		inline static Eigen::MatrixXd KroneckerProductWithIdentity(const Eigen::MatrixXd& mat, int identitySize)
+		{
+			Eigen::MatrixXd result(mat.rows() * identitySize, mat.cols() * identitySize);
 
-				for (int i = 0; i < mat.rows(); ++i)
-					for (int j = 0; j < mat.cols(); ++j)
-						result.block(Eigen::Index(i) * identitySize, Eigen::Index(j) * identitySize, identitySize, identitySize) = mat(i, j) * Eigen::MatrixXd::Identity(identitySize, identitySize);
+			for (int i = 0; i < mat.rows(); ++i)
+				for (int j = 0; j < mat.cols(); ++j)
+					result.block(Eigen::Index(i) * identitySize, Eigen::Index(j) * identitySize, identitySize, identitySize) = mat(i, j) * Eigen::MatrixXd::Identity(identitySize, identitySize);
 
-				return result;
-			}
+			return result;
+		}
 
-			inline static Eigen::MatrixXd IdentityKronecker(int identitySize, const Eigen::MatrixXd& mat)
-			{
-				Eigen::MatrixXd result = Eigen::MatrixXd::Zero(mat.rows() * identitySize, mat.cols() * identitySize);
+		inline static Eigen::MatrixXd IdentityKronecker(int identitySize, const Eigen::MatrixXd& mat)
+		{
+			Eigen::MatrixXd result = Eigen::MatrixXd::Zero(mat.rows() * identitySize, mat.cols() * identitySize);
 
-				for (int i = 0; i < identitySize; ++i)
-					result.block(i * mat.rows(), i * mat.cols(), mat.rows(), mat.cols()) = mat;
+			for (int i = 0; i < identitySize; ++i)
+				result.block(i * mat.rows(), i * mat.cols(), mat.rows(), mat.cols()) = mat;
 
-				return result;
-			}
+			return result;
+		}
 	};
 
 	class FUpOperator : public Operator
@@ -71,5 +71,5 @@ namespace NRG {
 	public:
 		FDownOperator(unsigned int dim = 4);
 	};
-	
+
 }

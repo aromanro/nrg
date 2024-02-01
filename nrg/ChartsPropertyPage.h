@@ -11,7 +11,6 @@ class CChartsPropertyPage : public CMFCPropertyPage
 
 public:
 	CChartsPropertyPage();
-	~CChartsPropertyPage() override;
 
 // Dialog Data
 #ifdef AFX_DESIGN_TIME

@@ -36,16 +36,6 @@ END_MESSAGE_MAP()
 
 // CnrgView construction/destruction
 
-CnrgView::CnrgView()
-	: timer(NULL)
-{
-	// TODO: add construction code here
-}
-
-CnrgView::~CnrgView()
-{
-}
-
 BOOL CnrgView::PreCreateWindow(CREATESTRUCT& cs)
 {
 	// TODO: Modify the Window class or styles here by modifying
@@ -178,7 +168,7 @@ void CnrgView::OnTimer(UINT_PTR nIDEvent)
 
 void CnrgView::StartRefreshing()
 {
-	if (!timer) timer = SetTimer(1, 1000, NULL);
+	if (!timer) timer = SetTimer(1, 1000, nullptr);
 	BeginWaitCursor();
 }
 
