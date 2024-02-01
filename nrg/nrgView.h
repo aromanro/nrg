@@ -13,7 +13,6 @@ protected: // create from serialization only
 	DECLARE_MESSAGE_MAP()
 
 public:
-
 	CnrgDoc* GetDocument() const;
 
 	void StartRefreshing();
