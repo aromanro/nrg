@@ -4,19 +4,17 @@
 namespace NRG {
 
 	Operator::Operator(unsigned int size, bool extendChangeSign)
-		: changeSign(extendChangeSign)
+		: changeSign(extendChangeSign), matrix(Eigen::MatrixXd::Zero(size, size))
 	{
-		matrix = Eigen::MatrixXd::Zero(size, size);
 	}
 
 
 	void Operator::Extend()
 	{
-		Eigen::MatrixXd newop;
 		const unsigned int oldsize = static_cast<unsigned int>(matrix.rows());
 		const unsigned int newsize = 4 * oldsize;
 
-		newop = Eigen::MatrixXd::Zero(newsize, newsize);
+		Eigen::MatrixXd newop = Eigen::MatrixXd::Zero(newsize, newsize);
 
 		newop.block(0, 0, oldsize, oldsize) = matrix;
 
@@ -49,8 +47,7 @@ namespace NRG {
 		ASSERT(dim % 4 == 0);
 
 		const int subsize = dim / 4;
-		matrix.block(0, subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
-		matrix.block(2ULL * subsize, 3ULL * subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
+		matrix.block(2ULL * subsize, 3ULL * subsize, subsize, subsize) = matrix.block(0, subsize, subsize, subsize) = Eigen::MatrixXd::Identity(subsize, subsize);
 	}
 
 	//<0|down|down> = <0|0> = 1
