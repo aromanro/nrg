@@ -63,7 +63,7 @@ namespace NRG {
 		AddSite();
 
 		const int enlargedMatrixSize = 4 * curMatrixSize;
-		const int nextMatrixSize = min(enlargedMatrixSize, maxSize);
+		const int nextMatrixSize = std::min(enlargedMatrixSize, maxSize);
 
 		// diagonalize the hamiltonian
 		// the eigenvalues and eigenvectors are already sorted
