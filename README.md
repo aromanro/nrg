@@ -22,6 +22,7 @@ The project compiles on Windows with Visual Studio 2026 (the code can be compile
 Besides mfc and other typical VC++ runtime libraries, the program uses GDI+ for drawing.
 
 The program deals with matrices using Eigen: http://eigen.tuxfamily.org/index.php?title=Main_Page
+Eigen 5 is used currently. It worked with an older version as well, but I recommend using ver 5 because it has some fixed issues. 
 
 ### CLASSES
 
