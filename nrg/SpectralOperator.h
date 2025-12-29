@@ -17,7 +17,7 @@ namespace NRG {
 
 		void PassSpectral(int iter, double EnergyScale, const Eigen::VectorXd& evals);
 
-		std::vector<std::pair<double, double>> SpectralOperator::GetSpectrum() const;
+		std::vector<std::pair<double, double>> GetSpectrum() const;
 
 	protected:
 		void AdjustSpectrum(double min_energy_before, double max_energy_current, double EnergyScale, std::vector<std::pair<double, double>>& spectrum) const;

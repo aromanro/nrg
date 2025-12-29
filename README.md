@@ -15,7 +15,7 @@ The rest of the program is very simple, just an interface to the NRG. It allows 
 [![Program video](https://img.youtube.com/vi/rZFpruv99ww/0.jpg)](https://youtu.be/rZFpruv99ww)
 ### TOOLS
 
-The project compiles on Windows with Visual Studio 2015.
+The project compiles on Windows with Visual Studio 2026 (the code can be compiled with older versions starting with VS 2015, but it's currently maintained with VS 2026 and C++ 17 or higher).
 
 ### LIBRARIES
 
